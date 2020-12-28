@@ -7,7 +7,10 @@ import WelcomeLastScreen from './welcome-last';
 
 export default function WelcomeScreen () {
     return(
-        <ViewPager style={styles.viewPager} initialPage={0}>
+        <ViewPager 
+            style={styles.viewPager} 
+            initialPage={0} 
+            scrollEnabled={true}>
             <WelcomeFristScreen key="1"/>
             <WelcomeLastScreen key="2"/>
         </ViewPager>
