@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Image, ImageBackground } from 'react-native';
+import { ChevronLeft, ChevronRight } from 'react-native-feather';
 
 import styles from './styles'
 import logo from './assets/logo.png'
@@ -18,6 +19,11 @@ export default function App() {
       <View style={styles.containerRouts}>
         <Image source={logo} style={styles.imgLogo} />
         <WelcomeScreen/>
+        <View style= {styles.containerButtons}>
+          <ChevronLeft size={18} color="#000" />
+          {/* <Image /> */}
+          <ChevronRight size={18} color="#000" />
+        </View>
       </View>
 
     </ImageBackground>
