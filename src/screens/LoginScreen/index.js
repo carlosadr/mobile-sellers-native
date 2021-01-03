@@ -46,14 +46,18 @@ export default function LoginScreen () {
                     <Text style={styles.text}>
                         Ou
                     </Text>
-                    <Text style={styles.text}>
-                        Você é novo por aqui? 
+
+                    <View style={{ flexDirection: 'row' , alignItems : 'center'}}>
+                        <Text style={ [styles.text]}>
+                            Você é novo por aqui? {" "}
+                        </Text>
+                        
                         <TouchableOpacity>
-                            <Text style={styles.text}>
-                                Cadastre-se
+                            <Text style={ [styles.text, { fontWeight : '700'}] }>
+                                Cadastre-se.
                             </Text>
-                        </TouchableOpacity>.
-                    </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </ImageBackground>

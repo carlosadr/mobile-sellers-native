@@ -1,5 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
+
+const screen = Dimensions.get('screen');
+var font = 14, altura = '22%', padding = '8%';
+
+if (screen.height > 800) {
+    font += 2;
+    altura = '25%';
+    padding = '15%';
+}
 
 const styles = StyleSheet.create({
     imgBackground : {
@@ -20,9 +29,9 @@ const styles = StyleSheet.create({
     },
 
     containerHeader : {
-        height : '22%',
+        height : altura,
         marginBottom : '12%',
-        padding : '8%',
+        padding : padding,
         alignItems : 'center',
         justifyContent : 'center',
     },
@@ -31,21 +40,25 @@ const styles = StyleSheet.create({
         flex : 1,
         justifyContent : 'center',
         alignItems : 'center',
-        paddingHorizontal : 24,
+        paddingHorizontal : '15%',
     },
 
     containerRegister : {
         flex : 1,
+        justifyContent : 'center',
+        alignItems : 'center',
+        paddingBottom: '2%'
     },
 
     text : {
         color : '#1AA1BE',
         textAlign : 'center',
-        fontSize : 16,
+        fontSize : font,
     },
 
     containerContants : {
         flex : 3,
+        maxHeight : 320, 
         padding : 8,
         alignItems: 'center',
         justifyContent: 'center',
@@ -97,7 +110,7 @@ const styles = StyleSheet.create({
     textButtons : {
         flex : 5,
         textAlign : 'center',
-        fontSize : 16,
+        fontSize : font,
         color : '#F4F6F9',
     },
 })
