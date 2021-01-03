@@ -4,13 +4,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-import WelcomeScreens from './screens/welcome-screens'
+import WelcomeScreen from './screens/WelcomeScreen'
 
 export default function Routes() {
     return(
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown : false }}>
-                <Stack.Screen name="Welcome Screens" component={WelcomeScreens} />
+            <Stack.Navigator 
+                initialRouteName="WelcomeScreen" 
+                screenOptions={{ headerShown : false }}>
+
+                <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
+
             </Stack.Navigator>
         </NavigationContainer>
     )
