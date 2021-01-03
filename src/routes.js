@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 import WelcomeScreen from './screens/WelcomeScreen'
+import LoginScreen from './screens/LoginScreen'
 
 export default function Routes() {
     return(
@@ -14,6 +15,7 @@ export default function Routes() {
                 screenOptions={{ headerShown : false }}>
 
                 <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
+                <Stack.Screen name="LoginScreen" component={ LoginScreen } />
 
             </Stack.Navigator>
         </NavigationContainer>
