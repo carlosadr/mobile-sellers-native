@@ -7,7 +7,8 @@ import styles from './styles'
 export default function App() {
   return (
     <View style={styles.containerRouts}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
+      <LoginScreenEmail />
     </View>
   );
 }
