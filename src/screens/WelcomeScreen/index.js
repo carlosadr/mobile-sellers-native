@@ -14,7 +14,7 @@ import WelcomeFristScreen from './welcome-frist';
 import WelcomeLastScreen from './welcome-last';
 
 export default function WelcomeScreen () {
-    const [selectedPage, setSelectedPage] = useState(0);
+    const [selectedPage, setSelectedPage] = useState(1);
     const [visible, setVisible] = useState('transparent');
 
     const navigation = useNavigation();

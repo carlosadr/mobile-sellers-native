@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 
 import imgBackground from "../../../assets/background-2.png";
@@ -10,6 +11,13 @@ import iconEmail from "../../../assets/icons-social/icon-email.png";
 import styles from './styles';
 
 export default function LoginScreen () {
+
+    const navigation = useNavigation();
+
+    function navigationToLogInEmail() {
+        navigation.navigate('LoginScreenEmail');
+    }
+
     return(
         <ImageBackground style={styles.imgBackground} source={ imgBackground }>
             <View style={styles.container}>
@@ -35,7 +43,7 @@ export default function LoginScreen () {
                             <Text style={styles.textButtons}>Entrar usando Google</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={ [styles.buttonTouchable, styles.buttonTouchableEmail, styles.buttonShadow] }>
+                        <TouchableOpacity onPress={() => {navigationToLogInEmail()}} style={ [styles.buttonTouchable, styles.buttonTouchableEmail, styles.buttonShadow] }>
                             <Image style={styles.icons} source={ iconEmail }/>
                             <Text style={[styles.textButtons, {color : '#585D59'}]}>Entrar usando E-mail</Text>
                         </TouchableOpacity>
