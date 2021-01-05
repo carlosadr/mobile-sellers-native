@@ -14,7 +14,7 @@ import WelcomeFristScreen from './welcome-frist';
 import WelcomeLastScreen from './welcome-last';
 
 export default function WelcomeScreen () {
-    const [selectedPage, setSelectedPage] = useState(1);
+    const [selectedPage, setSelectedPage] = useState('0');
     const [visible, setVisible] = useState('transparent');
 
     const navigation = useNavigation();
@@ -24,7 +24,7 @@ export default function WelcomeScreen () {
     }
 
     function visibleElements() {
-        if( selectedPage < 1 && visible == 'transparent'){
+        if( selectedPage < "1" && visible == 'transparent'){
             setVisible('#DE583D')
         }
         else {
@@ -45,8 +45,9 @@ export default function WelcomeScreen () {
                     style={styles.viewPager}
                     initialPage={0}
                     scrollEnabled={true}
-                    onPageSelected={(e) => {
-                        setSelectedPage(e.nativeEvent.position)
+                    onPageSelected={(event) => {
+                        setSelectedPage(event.nativeEvent.position)
+                        alert(selectedPage)
                         visibleElements()
                     }}
                     >
