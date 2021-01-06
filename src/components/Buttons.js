@@ -1,43 +1,63 @@
-import React from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
-    View,
     Text,
     TouchableOpacity,
     StyleSheet,
 } from 'react-native';
 
-const ButtonSolid = (props) => {
-    return(
-        <TouchableOpacity 
-            style={[
-                styles.containerButton,
-                styles.buttonSolidColor,
-                props.style,
-            ]}
-            onPress={props.onPress}
-            disabled={props.disabled}
-        >
-            <View style={{flex:1, justifyContent:'center', padding: 8}}>{props.icon}</View>
-            <Text style={styles.textSolid}>{props.label}</Text>
-        </TouchableOpacity>
-    )
+class ButtonSolid extends Component {
+    static propTypes = {
+        label: PropTypes.string.isRequired,
+        onPress : PropTypes.func.isRequired,
+        disabled : PropTypes.bool,
+        icon : PropTypes.element,
+    }
+
+    render = () => {
+        const { label, onPress, disabled, icon } = this.props
+        return(
+            <TouchableOpacity 
+                style={[
+                    styles.containerButton,
+                    styles.buttonSolidColor,
+                ]}
+                onPress={onPress}
+                disabled={disabled}
+            >
+                {icon}
+                <Text style={styles.textSolid}>{label}</Text>
+            </TouchableOpacity>
+        )
+        
+    }
 }
 
-const ButtonOutlined = (props) => {
-    return(
-        <TouchableOpacity 
-            style={[
-                styles.containerButton,
-                styles.buttonOutlined,
-                props.style,
-            ]}
-            onPress={props.onPress}
-            disabled={props.disabled}
-        >
-            {props.icon}
-            <Text style={styles.textOutlined}>{props.label}</Text>
-        </TouchableOpacity>
-    )
+class ButtonOutlined extends Component {
+    static propTypes = {
+        label: PropTypes.string.isRequired,
+        onPress : PropTypes.func.isRequired,
+        disabled : PropTypes.bool,
+        icon : PropTypes.element,
+    }
+
+    render = () => {
+        const { label, onPress, disabled, icon } = this.props
+        return(
+            <TouchableOpacity 
+                style={[
+                    styles.containerButton,
+                    styles.buttonOutlined,
+                ]}
+                onPress={onPress}
+                disabled={disabled}
+            >
+                {icon}
+                <Text style={styles.textOutlined}>{label}</Text>
+            </TouchableOpacity>
+        )
+        
+    }
 }
 
 const styles = StyleSheet.create({
@@ -46,7 +66,7 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         justifyContent : 'space-evenly',
         alignItems : 'center',
-        width : '80%',
+        width : '100%',
         maxHeight : 60,
         borderRadius : 50,
     },
