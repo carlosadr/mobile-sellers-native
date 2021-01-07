@@ -4,29 +4,60 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
+    View,
 } from 'react-native';
+
+import {
+    white,
+    blue,
+    orange,
+    chumbo,
+    noEvidence
+} from './Colors'
 
 class ButtonSolid extends Component {
     static propTypes = {
+        marginHorizontal : PropTypes.number,
+        marginVertical : PropTypes.number,
         label: PropTypes.string.isRequired,
         onPress : PropTypes.func.isRequired,
         disabled : PropTypes.bool,
-        icon : PropTypes.element,
+        leftIcon : PropTypes.element,
+        rightIcon : PropTypes.element,
     }
 
     render = () => {
-        const { label, onPress, disabled, icon } = this.props
+        const { 
+            marginHorizontal, 
+            marginVertical, 
+            label, 
+            onPress, 
+            disabled, 
+            leftIcon, 
+            rightIcon 
+        } = this.props
+
         return(
             <TouchableOpacity 
                 style={[
                     styles.containerButton,
                     styles.buttonSolidColor,
+                    { 
+                        marginHorizontal : marginHorizontal,
+                        marginVertical : marginVertical,
+                    }
                 ]}
                 onPress={onPress}
                 disabled={disabled}
             >
-                {icon}
-                <Text style={styles.textSolid}>{label}</Text>
+                <View style={styles.containerText}>
+                    {leftIcon}
+                    <Text style={[ styles.text, styles.solidColor]}>
+                        {label}
+                    </Text>
+                    {rightIcon}
+                </View>
+                
             </TouchableOpacity>
         )
         
@@ -35,25 +66,46 @@ class ButtonSolid extends Component {
 
 class ButtonOutlined extends Component {
     static propTypes = {
+        marginHorizontal : PropTypes.number,
+        marginVertical : PropTypes.number,
         label: PropTypes.string.isRequired,
         onPress : PropTypes.func.isRequired,
         disabled : PropTypes.bool,
-        icon : PropTypes.element,
+        leftIcon : PropTypes.element,
+        rightIcon : PropTypes.element,
     }
 
     render = () => {
-        const { label, onPress, disabled, icon } = this.props
+        const { 
+            marginHorizontal, 
+            marginVertical, 
+            label, 
+            onPress, 
+            disabled, 
+            leftIcon, 
+            rightIcon 
+        } = this.props
+        
         return(
             <TouchableOpacity 
                 style={[
                     styles.containerButton,
                     styles.buttonOutlined,
+                    { 
+                        marginHorizontal : marginHorizontal,
+                        marginVertical : marginVertical,
+                    }
                 ]}
                 onPress={onPress}
                 disabled={disabled}
             >
-                {icon}
-                <Text style={styles.textOutlined}>{label}</Text>
+                <View style={styles.containerText}>
+                    {leftIcon}
+                    <Text style={[ styles.text, styles.outlinedColor]}>
+                        {label}
+                    </Text>
+                    {rightIcon}
+                </View>
             </TouchableOpacity>
         )
         
@@ -63,34 +115,43 @@ class ButtonOutlined extends Component {
 const styles = StyleSheet.create({
     containerButton : {
         flex : 1,
-        flexDirection : 'row',
-        justifyContent : 'space-evenly',
-        alignItems : 'center',
         width : '100%',
-        maxHeight : 60,
+        maxHeight : 58,
+        flexDirection : 'row',
         borderRadius : 50,
+        justifyContent : 'center',
+        alignItems : 'center',
     },
 
     buttonSolidColor : {
-        backgroundColor : '#1AA1BE',
+        backgroundColor : blue,
     },
 
     buttonOutlined : {
         borderWidth : 2,
-        borderColor : '#1AA1BE',
+        borderColor : blue,
     },
 
-    textSolid : {
-        flex : 6,
-        textAlign : 'center',
-        fontSize : 16,
-        color : '#FFF',
+    containerText : {
+        flex : 1,
+        maxWidth: '90%',
+        flexDirection : 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
-    textOutlined : {
-        textAlign : 'center',
+    text : {
+        textAlign : 'left',
+        marginHorizontal : 16,
         fontSize : 16,
-        color : '#1AA1BE',
+    },
+
+    solidColor : {
+        color : white,
+    },
+
+    outlinedColor : {
+        color : blue,
     }
 })
 
