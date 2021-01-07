@@ -1,10 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { 
     StyleSheet, 
     View, 
     TextInput, 
     Text
 } from 'react-native'
+
+import {
+    white,
+    blue,
+    orange,
+    chumbo,
+    noEvidence
+} from './Colors'
+
+class InputOutlined extends Component {
+    static propTypes = {
+        marginHorizontal : PropTypes.number,
+        marginVertical : PropTypes.number,
+        label: PropTypes.string.isRequired,
+        onPress : PropTypes.func,
+        // disabled : PropTypes.bool,
+        leftIcon : PropTypes.element,
+        rightIcon : PropTypes.element,
+    }
+
+    render = () => {
+        const { 
+            marginHorizontal, 
+            marginVertical, 
+            label, 
+            onPress, 
+            // disabled, 
+            leftIcon, 
+            rightIcon 
+        } = this.props
+
+        return(
+            <View>
+                {leftIcon}
+                <TextInput/>
+                {rightIcon}
+            </View>
+        )
+        
+    }
+}
 
 const TextInputOutlined = ( props ) => {
     return (
@@ -15,12 +57,6 @@ const TextInputOutlined = ( props ) => {
                 style={styles.containerTextInput} 
             />
         </View>
-    )
-}
-
-const TextInputFill = ( props ) => {
-    return (
-        <TextInput />
     )
 }
 

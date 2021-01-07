@@ -19,29 +19,7 @@ export default function App() {
   return (
     <View style={styles.containerRouts}>
       <StatusBar style="auto" />
-      <ButtonSolid 
-        label="Botao com Icone"
-        marginVertical = {8}
-        leftIcon= {<Camera size={20} color={white} />}
-        onPress={ () => {alert("Botão primario com icone foi precionado ")} } />
-
-      <ButtonSolid 
-        label="Botao sem Icone" 
-        marginVertical = {8}
-        rightIcon = {<UploadCloud size={20} color={white} />}
-        onPress={ () => {alert("Botão primario sem icone foi precionado ")} } />
-
-      <ButtonOutlined 
-        label="Botao com Icone"
-        marginVertical = {8}
-        leftIcon= {<Camera size={20} color={blue} />}
-        onPress={ () => {alert("Botão primario com icone foi precionado ")} } />
-
-      <ButtonOutlined 
-        label="Botao sem Icone" 
-        marginVertical = {8}
-        rightIcon = {<UploadCloud size={20} color={blue} />}
-        onPress={ () => {alert("Botão primario sem icone foi precionado ")} } />
+      
     </View>
   );
 }
