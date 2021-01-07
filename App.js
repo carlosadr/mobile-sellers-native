@@ -1,9 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-import { ButtonSolid, ButtonOutlined } from './src/components/Buttons'
+import { ButtonTabBar } from './src/components/Buttons'
 
-import { Camera, UploadCloud } from 'react-native-feather'
+import { Package, PieChart, Settings, ShoppingBag } from 'react-native-feather'
 
 import {
   white,
@@ -18,30 +18,32 @@ import styles from './styles'
 export default function App() {
   return (
     <View style={styles.containerRouts}>
+
       <StatusBar style="auto" />
-      <ButtonSolid 
-        label="Botao com Icone"
-        marginVertical = {8}
-        leftIcon= {<Camera size={20} color={white} />}
-        onPress={ () => {alert("Botão primario com icone foi precionado ")} } />
 
-      <ButtonSolid 
-        label="Botao sem Icone" 
+      <ButtonTabBar
+        label="Dashboard"
         marginVertical = {8}
-        rightIcon = {<UploadCloud size={20} color={white} />}
-        onPress={ () => {alert("Botão primario sem icone foi precionado ")} } />
+        icon= {<PieChart size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Dashboard")} } />
 
-      <ButtonOutlined 
-        label="Botao com Icone"
+<ButtonTabBar
+        label="Vendas"
         marginVertical = {8}
-        leftIcon= {<Camera size={20} color={blue} />}
-        onPress={ () => {alert("Botão primario com icone foi precionado ")} } />
+        icon= {<ShoppingBag size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Vendas")} } />
 
-      <ButtonOutlined 
-        label="Botao sem Icone" 
+<ButtonTabBar
+        label="Produtos"
         marginVertical = {8}
-        rightIcon = {<UploadCloud size={20} color={blue} />}
-        onPress={ () => {alert("Botão primario sem icone foi precionado ")} } />
+        icon= {<Package size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Produtos")} } />
+
+<ButtonTabBar
+        label="Settings"
+        marginVertical = {8}
+        icon= {<Settings size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Dashboard")} } />
     </View>
   );
 }
