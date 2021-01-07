@@ -1,9 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-import { ButtonSolid, ButtonOutlined } from './src/components/Buttons'
+import { ButtonTabBar } from './src/components/Buttons'
 
-import { Camera, UploadCloud } from 'react-native-feather'
+import { Package, PieChart, Settings, ShoppingBag } from 'react-native-feather'
 
 import {
   white,
@@ -18,8 +18,36 @@ import styles from './styles'
 export default function App() {
   return (
     <View style={styles.containerRouts}>
+
       <StatusBar style="auto" />
+<<<<<<< HEAD
       
+=======
+
+      <ButtonTabBar
+        label="Dashboard"
+        marginVertical = {8}
+        icon= {<PieChart size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Dashboard")} } />
+
+<ButtonTabBar
+        label="Vendas"
+        marginVertical = {8}
+        icon= {<ShoppingBag size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Vendas")} } />
+
+<ButtonTabBar
+        label="Produtos"
+        marginVertical = {8}
+        icon= {<Package size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Produtos")} } />
+
+<ButtonTabBar
+        label="Settings"
+        marginVertical = {8}
+        icon= {<Settings size={16} color={blue} strokeWidth={1.2} />}
+        onPress={ () => {console.log("Você precionou a Dashboard")} } />
+>>>>>>> 444dd2ef67c3623b1be30cce452bf251094a8dab
     </View>
   );
 }

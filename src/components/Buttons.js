@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import {
     Text,
     TouchableOpacity,
@@ -112,6 +113,47 @@ class ButtonOutlined extends Component {
     }
 }
 
+class ButtonTabBar extends Component {
+    static propTypes = {
+        marginHorizontal : PropTypes.number,
+        marginVertical : PropTypes.number,
+        label: PropTypes.string.isRequired,
+        onPress : PropTypes.func.isRequired,
+        icon : PropTypes.element,
+    }
+
+    render = () => {
+        const { 
+            marginHorizontal,
+            marginVertical,
+            label,
+            onPress,
+            icon,
+        } = this.props
+        
+        return(
+            <TouchableOpacity 
+                style={[
+                    styles.containerButtonTabBar,
+                    { 
+                        marginHorizontal : marginHorizontal,
+                        marginVertical : marginVertical,
+                    }
+                ]}
+                onPress={onPress}
+            >
+                <View style={styles.containerTextTabBar}>
+                    {icon}
+                    <Text style={[ styles.textTabBar, styles.outlinedColor]}>
+                        {label}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        )
+        
+    }
+}
+
 const styles = StyleSheet.create({
     containerButton : {
         flex : 1,
@@ -123,6 +165,17 @@ const styles = StyleSheet.create({
         alignItems : 'center',
     },
 
+    containerButtonTabBar : {
+        flex : 1,
+        width : '100%',
+        maxHeight : 80,
+        flexDirection : 'column',
+        justifyContent : 'center',
+        alignItems : 'center',
+        borderWidth : 1,
+        borderColor : '#DEDEDE'
+    },
+
     buttonSolidColor : {
         backgroundColor : blue,
     },
@@ -130,6 +183,14 @@ const styles = StyleSheet.create({
     buttonOutlined : {
         borderWidth : 2,
         borderColor : blue,
+    },
+
+    containerTextTabBar : {
+        flex : 1,
+        maxWidth: '90%',
+        flexDirection : 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     containerText : {
@@ -146,6 +207,12 @@ const styles = StyleSheet.create({
         fontSize : 16,
     },
 
+    textTabBar : {
+        textAlign : 'left',
+        marginVertical : 8,
+        fontSize : 10,
+    },
+
     solidColor : {
         color : white,
     },
@@ -158,4 +225,5 @@ const styles = StyleSheet.create({
 export { 
     ButtonSolid,
     ButtonOutlined,
+    ButtonTabBar,
 };
