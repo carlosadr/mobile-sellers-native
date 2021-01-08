@@ -16,17 +16,22 @@ import {
     noEvidence
 } from './Colors'
 
-class ButtonSolid extends Component {
+class PropsDefault extends Component {
     static propTypes = {
         marginHorizontal : PropTypes.number,
         marginVertical : PropTypes.number,
         label: PropTypes.string.isRequired,
         onPress : PropTypes.func.isRequired,
         disabled : PropTypes.bool,
+        focusColor : PropTypes.string,
+        icon : PropTypes.element,
         leftIcon : PropTypes.element,
         rightIcon : PropTypes.element,
     }
+}
 
+class ButtonSolid extends PropsDefault {
+    
     render = () => {
         const { 
             marginHorizontal, 
@@ -35,7 +40,7 @@ class ButtonSolid extends Component {
             onPress, 
             disabled, 
             leftIcon, 
-            rightIcon 
+            rightIcon,
         } = this.props
 
         return(
@@ -51,31 +56,20 @@ class ButtonSolid extends Component {
                 onPress={onPress}
                 disabled={disabled}
             >
-                <View style={styles.containerText}>
+                <View style={[ styles.containerText, styles.flexDirectionRow ]}>
                     {leftIcon}
-                    <Text style={[ styles.text, styles.solidColor]}>
+                    <Text style={[ styles.text, styles.textSize, styles.solidColor]}>
                         {label}
                     </Text>
                     {rightIcon}
                 </View>
-                
             </TouchableOpacity>
         )
-        
     }
 }
 
-class ButtonOutlined extends Component {
-    static propTypes = {
-        marginHorizontal : PropTypes.number,
-        marginVertical : PropTypes.number,
-        label: PropTypes.string.isRequired,
-        onPress : PropTypes.func.isRequired,
-        disabled : PropTypes.bool,
-        leftIcon : PropTypes.element,
-        rightIcon : PropTypes.element,
-    }
-
+class ButtonOutlined extends PropsDefault {
+    
     render = () => {
         const { 
             marginHorizontal, 
@@ -100,41 +94,34 @@ class ButtonOutlined extends Component {
                 onPress={onPress}
                 disabled={disabled}
             >
-                <View style={styles.containerText}>
+                <View style={[ styles.containerText, styles.flexDirectionRow ]}>
                     {leftIcon}
-                    <Text style={[ styles.text, styles.outlinedColor]}>
+                    <Text style={[ styles.text, styles.outlinedColor ]}>
                         {label}
                     </Text>
                     {rightIcon}
                 </View>
             </TouchableOpacity>
         )
-        
     }
 }
 
-class ButtonTabBar extends Component {
-    static propTypes = {
-        marginHorizontal : PropTypes.number,
-        marginVertical : PropTypes.number,
-        label: PropTypes.string.isRequired,
-        onPress : PropTypes.func.isRequired,
-        icon : PropTypes.element,
-    }
-
+class ButtonTabBar extends PropsDefault {
+    
     render = () => {
         const { 
             marginHorizontal,
             marginVertical,
             label,
             onPress,
+            focusColor,
             icon,
         } = this.props
         
         return(
             <TouchableOpacity 
                 style={[
-                    styles.containerButtonTabBar,
+                    styles.containerButton,
                     { 
                         marginHorizontal : marginHorizontal,
                         marginVertical : marginVertical,
@@ -142,84 +129,87 @@ class ButtonTabBar extends Component {
                 ]}
                 onPress={onPress}
             >
-                <View style={styles.containerTextTabBar}>
-                    {icon}
-                    <Text style={[ styles.textTabBar, styles.outlinedColor]}>
+                <View style={[ styles.containerText, styles.flexDirectionColumn ]}>
+                    { icon }
+                    <Text style={[ styles.textSizeTabBar, styles.textColorTabBar, { color : focusColor } ]}>
                         {label}
                     </Text>
                 </View>
             </TouchableOpacity>
         )
-        
     }
 }
 
 const styles = StyleSheet.create({
+
+    //#region Estilos Globais.
     containerButton : {
         flex : 1,
         width : '100%',
         maxHeight : 58,
-        flexDirection : 'row',
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
+
+    borderRadius : {
         borderRadius : 50,
-        justifyContent : 'center',
-        alignItems : 'center',
     },
-
-    containerButtonTabBar : {
-        flex : 1,
-        width : '100%',
-        maxHeight : 80,
+    
+    flexDirectionRow : {
+        flexDirection : 'row',
+    },
+    
+    flexDirectionColumn : {
         flexDirection : 'column',
-        justifyContent : 'center',
-        alignItems : 'center',
-        borderWidth : 1,
-        borderColor : '#DEDEDE'
     },
-
-    buttonSolidColor : {
-        backgroundColor : blue,
-    },
-
-    buttonOutlined : {
-        borderWidth : 2,
-        borderColor : blue,
-    },
-
-    containerTextTabBar : {
-        flex : 1,
-        maxWidth: '90%',
-        flexDirection : 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
+    
     containerText : {
         flex : 1,
         maxWidth: '90%',
-        flexDirection : 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
-
+    
     text : {
-        textAlign : 'left',
+        textAlign : 'center',
         marginHorizontal : 16,
+    },
+
+    textSize : {
         fontSize : 16,
     },
 
-    textTabBar : {
-        textAlign : 'left',
+    //#endregion Estilos Globais.
+    
+    //#region Estilos Botao solido ( Fundo preeenchido ).
+    buttonSolidColor : { 
+        backgroundColor : blue 
+    },
+
+    textColorSolid : { color : white },
+
+    //#endregion
+
+    //#region Estilos Botao c/ bordas.
+    buttonOutlined : {
+        borderWidth : 1.2,
+        borderColor : blue 
+    },
+    
+    textColorOutlined : { color : blue },
+
+    //#endregion Estilos Botao c/ bordas.
+
+    //#region Estilos TabBar.
+    textSizeTabBar : {
         marginVertical : 8,
-        fontSize : 10,
+        fontSize : 12,
     },
+    
+    textColorTabBar : { color : chumbo },
 
-    solidColor : {
-        color : white,
-    },
+    //#endregion Estilos TabBar.
 
-    outlinedColor : {
-        color : blue,
-    }
 })
 
 export { 
