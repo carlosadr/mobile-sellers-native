@@ -58,11 +58,11 @@ class Solid extends PropsDefault {
                 disabled={disabled}
             >
                 <View style={[ styles.containerText, styles.flexDirectionRow ]}>
-                    {createIconReact(leftIcon, color)}
+                    {createIconReact(leftIcon, white)}
                         <Text style={[ styles.text, styles.textSize, { color : white } ]}>
                             {label}
                         </Text>
-                    {createIconReact(rightIcon, color)}
+                    {createIconReact(rightIcon, white)}
                 </View>
             </TouchableOpacity>
         )

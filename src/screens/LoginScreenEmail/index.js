@@ -1,16 +1,24 @@
-import React, { useState }from 'react';
-import { View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
-
-import { User } from 'react-native-feather';
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, ImageBackground } from 'react-native';
+import { ChevronRight } from 'react-native-feather';
 
 import imgBackground from "../../../assets/background-2.png";
 import imgLogo from "../../../assets/logo.png";
 
+import * as Icon from "../../components/Buttons";
+import { orange } from '../../components/Colors';
+
 import styles from './styles';
 
 export default function LoginScreenEmail () {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
+    const navigation = useNavigation();
+
+    function navigationToScreenTab() {
+        console.log("Botao de ir para Tab Screen acionado.")
+        navigation.navigate('ScreenTab');
+    }
 
     return(
         <ImageBackground style={styles.imgBackground} source={ imgBackground }>
@@ -26,6 +34,13 @@ export default function LoginScreenEmail () {
                 </View>
 
                 <View style={styles.containerContants}>
+
+                    <Icon.Solid 
+                        label="Avançar para Tab Screen" 
+                        color={orange} 
+                        rightIcon={ ChevronRight } 
+                        onPress={()=>{navigationToScreenTab()}}
+                    />
                     
                 </View>
             </View>
