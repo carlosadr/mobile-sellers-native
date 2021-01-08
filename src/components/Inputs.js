@@ -4,8 +4,11 @@ import {
     StyleSheet, 
     View, 
     TextInput, 
-    Text
+    Text,
+    Animated
 } from 'react-native'
+
+import { FloatingLabelInput } from 'react-native-floating-label-input';
 
 import {
     white,
@@ -19,74 +22,68 @@ class InputOutlined extends Component {
     static propTypes = {
         marginHorizontal : PropTypes.number,
         marginVertical : PropTypes.number,
+        color: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
+        placeholder: PropTypes.string,
         onPress : PropTypes.func,
-        // disabled : PropTypes.bool,
         leftIcon : PropTypes.element,
         rightIcon : PropTypes.element,
     }
 
     render = () => {
         const { 
-            marginHorizontal, 
-            marginVertical, 
-            label, 
-            onPress, 
-            // disabled, 
+            marginHorizontal,
+            marginVertical,
+            color,
+            label,
+            placeholder,
+            onPress,
             leftIcon, 
             rightIcon 
         } = this.props
 
+        function createIconReact (props) {
+            if(props != null){
+                return React.createElement(leftIcon,{color : color})
+            }
+            return
+        }
+
         return(
-            <View>
-                {leftIcon}
-                <TextInput/>
-                {rightIcon}
+            <View style={[styles.container]}>
+                {/* <Text style={[styles.label, {color : color}]}>{label}</Text> */}
+                {createIconReact(leftIcon)}
+                <FloatingLabelInput label={label} style={[styles.containerText, {color : color}]} placeholder={placeholder}/>
+                {createIconReact(rightIcon)}
             </View>
         )
         
     }
 }
 
-const TextInputOutlined = ( props ) => {
-    return (
-        <View style={styles.containerOutlined}>
-            <Text style={styles.containerTextLabel} >{props.label}</Text>
-            <TextInput 
-                placeholder={props.placeholder} 
-                style={styles.containerTextInput} 
-            />
-        </View>
-    )
-}
-
 const styles = StyleSheet.create({
-    containerOutlined : {
+    container : {
         flex : 1,
+        flexDirection : 'row',
         padding : 8,
         width: '100%',
-        maxHeight : 50,
-
-        borderStyle : 'solid',
-        borderWidth : 2,
-        borderColor : '#1AA1BE',
-        borderRadius : 8,
+        height : '100%',
+        maxHeight : 60,
+        borderColor : blue,
+        borderWidth : 1,
     },
 
-    containerTextLabel : {
+    containerText : {
+        marginHorizontal : 8,
+    },
+
+    label : {
         flex : 1,
         position: 'absolute',
         top : '40%',
         left : 8,
         fontSize : 18,
-        color : '#1AA1BE'
     },
-
-    containerTextInput : {
-        flex : 1,
-        fontSize : 16,
-        color : '#1AA1BE'
-    }
 })
 
-export { TextInputFill, TextInputOutlined };
+export { InputOutlined };
