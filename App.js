@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
 import { Eye, EyeOff } from 'react-native-feather'
 
-import { InputOutlined } from "./src/components/Inputs";
-import { ButtonTabBar } from './src/components/Buttons'
+import * as Button from './src/components/Buttons'
 
 import {
   white,
@@ -18,20 +17,51 @@ import {
 import styles from './styles'
 
 export default function App() {
+  const [color, setColor] = useState( chumbo )
+
   return (
     <View style={styles.containerRouts}>
-
       <StatusBar style="auto" />
-      
-      <InputOutlined 
-        color={orange} 
-        label="Label do Input" 
-        placeholder="ex. placeholder"
-        leftIcon={Eye}
+
+      <Button.Solid 
+        color={color} 
+        label="Botao Solido" 
+        onPress={ () => {console.log("Elemento precionado > Solido")} } 
       />
 
-      <ButtonTabBar label="Elemento Tab" color={orange} icon={EyeOff} />
+      <Button.Outlined 
+        color={color} 
+        disable={true}
+        label="Botao Linha"
+        onPress={ () => {console.log("Elemento precionado > Linha")} } 
+      />
 
+      <View style={styles.containerTabBar}>
+        <Button.TabBar
+          label="Elemento A" 
+          color={color} 
+          onPress={() => {console.log("Elemento precionado > A")}} 
+          icon={EyeOff}
+        />
+        <Button.TabBar
+          label="Elemento B" 
+          color={color} 
+          onPress={() => {console.log("Elemento precionado > B")}} 
+          icon={EyeOff}
+        />
+        <Button.TabBar
+          label="Elemento C" 
+          color={color} 
+          onPress={() => {console.log("Elemento precionado > C")}} 
+          icon={EyeOff}
+        />
+        <Button.TabBar 
+          label="Elemento D" 
+          color={color} 
+          onPress={() => {console.log("Elemento precionado > D")}} 
+          icon={EyeOff}
+        />
+      </View>
     </View>
   );
 }

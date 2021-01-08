@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import { white } from './Colors'
 import {
     Text,
     TouchableOpacity,
@@ -8,26 +8,17 @@ import {
     View,
 } from 'react-native';
 
-import {
-    white,
-    blue,
-    orange,
-    chumbo,
-    noEvidence
-} from './Colors'
-
 class PropsDefault extends Component {
     static propTypes = {
+        label: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+        onPress : PropTypes.func.isRequired,
         marginHorizontal : PropTypes.number,
         marginVertical : PropTypes.number,
-        color: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        onPress : PropTypes.func.isRequired,
         disabled : PropTypes.bool,
-        focusColor : PropTypes.string,
-        icon : PropTypes.element,
-        leftIcon : PropTypes.element,
-        rightIcon : PropTypes.element,
+        icon : PropTypes.elementType,
+        leftIcon : PropTypes.elementType,
+        rightIcon : PropTypes.elementType,
     }
 }
 
@@ -38,17 +29,17 @@ function createIconReact (icon, color) {
     return
 }
 
-class ButtonSolid extends PropsDefault {
+class Solid extends PropsDefault {
     
     render = () => {
         const { 
-            marginHorizontal, 
-            marginVertical, 
             color,
             label,
-            onPress, 
-            disabled, 
-            leftIcon, 
+            onPress,
+            disabled,
+            marginHorizontal,
+            marginVertical,
+            leftIcon,
             rightIcon,
         } = this.props
 
@@ -56,8 +47,9 @@ class ButtonSolid extends PropsDefault {
             <TouchableOpacity 
                 style={[
                     styles.containerButton,
-                    styles.buttonSolidColor,
-                    { 
+                    styles.borderRadius,
+                    {
+                        backgroundColor : color,
                         marginHorizontal : marginHorizontal,
                         marginVertical : marginVertical,
                     }
@@ -67,7 +59,7 @@ class ButtonSolid extends PropsDefault {
             >
                 <View style={[ styles.containerText, styles.flexDirectionRow ]}>
                     {createIconReact(leftIcon, color)}
-                        <Text style={[ styles.text, styles.textSize, styles.solidColor]}>
+                        <Text style={[ styles.text, styles.textSize, { color : white } ]}>
                             {label}
                         </Text>
                     {createIconReact(rightIcon, color)}
@@ -77,18 +69,18 @@ class ButtonSolid extends PropsDefault {
     }
 }
 
-class ButtonOutlined extends PropsDefault {
+class Outlined extends PropsDefault {
     
     render = () => {
         const { 
-            marginHorizontal, 
-            marginVertical, 
             color,
-            label, 
-            onPress, 
-            disabled, 
-            leftIcon, 
-            rightIcon 
+            label,
+            onPress,
+            disabled,
+            marginHorizontal,
+            marginVertical,
+            leftIcon,
+            rightIcon,
         } = this.props
         
         return(
@@ -96,7 +88,9 @@ class ButtonOutlined extends PropsDefault {
                 style={[
                     styles.containerButton,
                     styles.buttonOutlined,
+                    styles.borderRadius,
                     { 
+                        borderColor : color,
                         marginHorizontal : marginHorizontal,
                         marginVertical : marginVertical,
                     }
@@ -106,7 +100,7 @@ class ButtonOutlined extends PropsDefault {
             >
                 <View style={[ styles.containerText, styles.flexDirectionRow ]}>
                     {createIconReact(leftIcon, color)}
-                        <Text style={[ styles.text, styles.outlinedColor ]}>
+                        <Text style={[ styles.text, { color : color } ]}>
                             {label}
                         </Text>
                     {createIconReact(rightIcon, color)}
@@ -116,15 +110,15 @@ class ButtonOutlined extends PropsDefault {
     }
 }
 
-class ButtonTabBar extends PropsDefault {
+class TabBar extends PropsDefault {
     
     render = () => {
         const { 
-            marginHorizontal,
-            marginVertical,
             color,
             label,
             onPress,
+            marginHorizontal,
+            marginVertical,
             icon,
         } = this.props
         
@@ -192,19 +186,14 @@ const styles = StyleSheet.create({
     //#endregion Estilos Globais.
     
     //#region Estilos Botao solido ( Fundo preeenchido ).
-    buttonSolidColor : { 
-        backgroundColor : blue 
-    },
+    
 
     //#endregion
 
     //#region Estilos Botao c/ bordas.
     buttonOutlined : {
-        borderWidth : 1.2,
-        borderColor : blue 
+        borderWidth : 1,
     },
-    
-    textColorOutlined : { color : blue },
 
     //#endregion Estilos Botao c/ bordas.
 
@@ -213,15 +202,12 @@ const styles = StyleSheet.create({
         marginVertical : 8,
         fontSize : 12,
     },
-    
-    textColorTabBar : { color : chumbo },
-
     //#endregion Estilos TabBar.
 
 })
 
 export { 
-    ButtonSolid,
-    ButtonOutlined,
-    ButtonTabBar,
+    Solid,
+    Outlined,
+    TabBar,
 };
