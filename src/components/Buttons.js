@@ -110,6 +110,45 @@ class Outlined extends PropsDefault {
     }
 }
 
+class OnlyText extends PropsDefault {
+    
+    render = () => {
+        const { 
+            color,
+            label,
+            onPress,
+            disabled,
+            marginHorizontal,
+            marginVertical,
+            leftIcon,
+            rightIcon,
+        } = this.props
+        
+        return(
+            <TouchableOpacity 
+                style={[
+                    styles.containerButton,
+                    { 
+                        borderColor : color,
+                        marginHorizontal : marginHorizontal,
+                        marginVertical : marginVertical,
+                    }
+                ]}
+                onPress={onPress}
+                disabled={disabled}
+            >
+                <View style={[ styles.containerText, styles.flexDirectionRow ]}>
+                    {createIconReact(leftIcon, color)}
+                        <Text style={[ styles.text, { color : color } ]}>
+                            {label}
+                        </Text>
+                    {createIconReact(rightIcon, color)}
+                </View>
+            </TouchableOpacity>
+        )
+    }
+}
+
 class TabBar extends PropsDefault {
     
     render = () => {
@@ -209,5 +248,6 @@ const styles = StyleSheet.create({
 export { 
     Solid,
     Outlined,
+    OnlyText,
     TabBar,
 };

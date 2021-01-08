@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Image, ImageBackground, Text, TouchableOpacity } from 'react-native';
-
 import ViewPager from '@react-native-community/viewpager'
-import { ChevronLeft, ChevronRight } from 'react-native-feather';
+
+import { View, Image, ImageBackground } from 'react-native';
+import { OnlyText } from '../../components/Buttons'
+
+import * as Colors from '../../components/Colors';
+
+import { ChevronRight } from 'react-native-feather';
 
 import styles from './styles';
 
@@ -15,7 +19,8 @@ import WelcomeLastScreen from './welcome-last';
 
 export default function WelcomeScreen () {
     const [selectedPage, setSelectedPage] = useState(1);
-    const [visible, setVisible] = useState('transparent');
+    const [visible, setVisible] = useState(Colors.noEvidence);
+    const [disabled, setDisabled] = useState(true);
 
     const navigation = useNavigation();
 
@@ -24,11 +29,12 @@ export default function WelcomeScreen () {
     }
 
     function visibleElements() {
-        if( selectedPage < 1 && visible == 'transparent'){
-            setVisible('#DE583D')
-        }
-        else {
-            setVisible('transparent')
+        if( selectedPage < 1 && visible == Colors.noEvidence){
+            setVisible(Colors.orange)
+            setDisabled(false)
+        }else{
+            setVisible(Colors.noEvidence)
+            setDisabled(true)
         }
     }
 
@@ -56,16 +62,16 @@ export default function WelcomeScreen () {
                 </ViewPager>
 
                 <View style= {styles.containerButtons}>
-                    <ChevronLeft size={18} color="transparent" />
-
-                    <TouchableOpacity onPress={() => {navigationToLogIn()}} style={{ flexDirection : 'row', alignItems : 'center' }}>
-                        <Text style={{ color : visible, fontSize : 16, marginRight : 8 }}>Avançar</Text>
-                        <ChevronRight size={18} color={visible} />
-                    </TouchableOpacity>
+                    <View style={{ flex : 3 }} />
+                    <OnlyText 
+                        label="Avançar"
+                        color={visible}
+                        disabled={disabled}
+                        rightIcon={ChevronRight}
+                        onPress={ () => { navigationToLogIn() }}
+                    />
                 </View>
-
             </View>
-
         </ImageBackground>
     )
 }
