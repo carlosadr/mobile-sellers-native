@@ -8,8 +8,6 @@ import {
     Animated
 } from 'react-native'
 
-import { FloatingLabelInput } from 'react-native-floating-label-input';
-
 import {
     white,
     blue,
@@ -17,6 +15,13 @@ import {
     chumbo,
     noEvidence
 } from './Colors'
+
+function createIconReact (icon, color) {
+    if(icon != null){
+        return React.createElement(icon,{color : color})
+    }
+    return
+}
 
 class InputOutlined extends Component {
     static propTypes = {
@@ -42,19 +47,12 @@ class InputOutlined extends Component {
             rightIcon 
         } = this.props
 
-        function createIconReact (props) {
-            if(props != null){
-                return React.createElement(leftIcon,{color : color})
-            }
-            return
-        }
-
         return(
             <View style={[styles.container]}>
                 {/* <Text style={[styles.label, {color : color}]}>{label}</Text> */}
-                {createIconReact(leftIcon)}
-                <FloatingLabelInput label={label} style={[styles.containerText, {color : color}]} placeholder={placeholder}/>
-                {createIconReact(rightIcon)}
+                {createIconReact(leftIcon, color)}
+                <TextInput label={label} style={[styles.containerText, {color : color}]} placeholder={placeholder}/>
+                {createIconReact(rightIcon, color)}
             </View>
         )
         

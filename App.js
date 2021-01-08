@@ -1,11 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-import { ButtonTabBar } from './src/components/Buttons'
 
 import { Eye, EyeOff } from 'react-native-feather'
 
 import { InputOutlined } from "./src/components/Inputs";
+import { ButtonTabBar } from './src/components/Buttons'
 
 import {
   white,
@@ -29,6 +29,8 @@ export default function App() {
         placeholder="ex. placeholder"
         leftIcon={Eye}
       />
+
+      <ButtonTabBar label="Elemento Tab" color={orange} icon={EyeOff} />
 
     </View>
   );

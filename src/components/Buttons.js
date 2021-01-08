@@ -20,6 +20,7 @@ class PropsDefault extends Component {
     static propTypes = {
         marginHorizontal : PropTypes.number,
         marginVertical : PropTypes.number,
+        color: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         onPress : PropTypes.func.isRequired,
         disabled : PropTypes.bool,
@@ -30,13 +31,21 @@ class PropsDefault extends Component {
     }
 }
 
+function createIconReact (icon, color) {
+    if(icon != null){
+        return React.createElement(icon, {color : color})
+    }
+    return
+}
+
 class ButtonSolid extends PropsDefault {
     
     render = () => {
         const { 
             marginHorizontal, 
             marginVertical, 
-            label, 
+            color,
+            label,
             onPress, 
             disabled, 
             leftIcon, 
@@ -57,11 +66,11 @@ class ButtonSolid extends PropsDefault {
                 disabled={disabled}
             >
                 <View style={[ styles.containerText, styles.flexDirectionRow ]}>
-                    {leftIcon}
-                    <Text style={[ styles.text, styles.textSize, styles.solidColor]}>
-                        {label}
-                    </Text>
-                    {rightIcon}
+                    {createIconReact(leftIcon, color)}
+                        <Text style={[ styles.text, styles.textSize, styles.solidColor]}>
+                            {label}
+                        </Text>
+                    {createIconReact(rightIcon, color)}
                 </View>
             </TouchableOpacity>
         )
@@ -74,6 +83,7 @@ class ButtonOutlined extends PropsDefault {
         const { 
             marginHorizontal, 
             marginVertical, 
+            color,
             label, 
             onPress, 
             disabled, 
@@ -95,11 +105,11 @@ class ButtonOutlined extends PropsDefault {
                 disabled={disabled}
             >
                 <View style={[ styles.containerText, styles.flexDirectionRow ]}>
-                    {leftIcon}
-                    <Text style={[ styles.text, styles.outlinedColor ]}>
-                        {label}
-                    </Text>
-                    {rightIcon}
+                    {createIconReact(leftIcon, color)}
+                        <Text style={[ styles.text, styles.outlinedColor ]}>
+                            {label}
+                        </Text>
+                    {createIconReact(rightIcon, color)}
                 </View>
             </TouchableOpacity>
         )
@@ -112,9 +122,9 @@ class ButtonTabBar extends PropsDefault {
         const { 
             marginHorizontal,
             marginVertical,
+            color,
             label,
             onPress,
-            focusColor,
             icon,
         } = this.props
         
@@ -130,8 +140,8 @@ class ButtonTabBar extends PropsDefault {
                 onPress={onPress}
             >
                 <View style={[ styles.containerText, styles.flexDirectionColumn ]}>
-                    { icon }
-                    <Text style={[ styles.textSizeTabBar, styles.textColorTabBar, { color : focusColor } ]}>
+                    {createIconReact(icon, color)}
+                    <Text style={[ styles.textSizeTabBar, { color : color } ]}>
                         {label}
                     </Text>
                 </View>
@@ -185,8 +195,6 @@ const styles = StyleSheet.create({
     buttonSolidColor : { 
         backgroundColor : blue 
     },
-
-    textColorSolid : { color : white },
 
     //#endregion
 
