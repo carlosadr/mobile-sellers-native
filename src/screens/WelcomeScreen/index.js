@@ -11,14 +11,14 @@ import { ChevronRight } from 'react-native-feather';
 
 import styles from './styles';
 
-import imgBackground from '../../../assets/background.png'
-import logo from '../../../assets/logo.png'
+import imgBackground from '../../../assets/background.png';
+import logo from '../../../assets/logo.png';
 
 import WelcomeFristScreen from './welcome-frist';
 import WelcomeLastScreen from './welcome-last';
 
 export default function WelcomeScreen () {
-    const [selectedPage, setSelectedPage] = useState(1);
+    const [selectedPage, setSelectedPage] = useState(0);
     const [visible, setVisible] = useState(Colors.noEvidence);
     const [disabled, setDisabled] = useState(true);
 
@@ -28,8 +28,8 @@ export default function WelcomeScreen () {
         navigation.navigate('LoginScreen');
     }
 
-    function visibleElements() {
-        if( selectedPage < 1 && visible == Colors.noEvidence){
+    function visibleElements(position) {
+        if( position > 0 && visible === Colors.noEvidence){
             setVisible(Colors.orange)
             setDisabled(false)
         }else{
@@ -52,17 +52,16 @@ export default function WelcomeScreen () {
                     initialPage={0}
                     scrollEnabled={true}
                     onPageSelected={(event) => {
-                        setSelectedPage(event.nativeEvent.position)
-                        visibleElements()
+                        console.log(event.nativeEvent.position)
+                        visibleElements(event.nativeEvent.position)
                     }}
                     >
                     <WelcomeFristScreen key="1" />
                     <WelcomeLastScreen key="2" />
-
                 </ViewPager>
 
                 <View style= {styles.containerButtons}>
-                    <View style={{ flex : 3 }} />
+                    <View style={{ flex : 2.5 }} />
                     <OnlyText 
                         label="Avançar"
                         color={visible}
