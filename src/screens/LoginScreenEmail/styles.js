@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     containerContants : {
         flex : 5,
         width: '100%',
-        maxHeight: 150,
+        height: '100%',
         padding : 8,
         alignItems: 'center',
         justifyContent: 'center',
