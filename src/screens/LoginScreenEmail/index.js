@@ -6,8 +6,9 @@ import { ChevronRight, Eye, Lock } from 'react-native-feather';
 import imgBackground from "../../../assets/background-2.png";
 import imgLogo from "../../../assets/logo.png";
 
-import * as Icon from "../../components/Buttons";
+// import * as Icon from "../../components/Buttons";
 import Input from '../../components/Input'
+import Button from '../../components/Button'
 import * as Colors from '../../components/Colors';
 
 import styles from './styles';
@@ -86,9 +87,10 @@ export default function LoginScreenEmail () {
                         onChangeText={ text => setText(text) }
                     />
 
-                    <Icon.Solid 
+                    <Button
                         label="Avançar para Tab Screen" 
-                        color={Colors.orange} 
+                        type = "solid"
+                        color="blue" 
                         rightIcon={ ChevronRight } 
                         onPress={()=>{navigationToScreenTab()}}
                     />
