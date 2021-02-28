@@ -19,16 +19,12 @@ export default function LoginScreenEmail () {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [text, setText] = useState();
 
     const checkEmail = () => {
-        return email !== "" ? false : true
+        return email ? false : true
     }
     const checkPassword = () => {
-        return password !== "" ? false : true
-    }
-    const checkText = () => {
-        return text !== "" ? false : true
+        return password ? false : true
     }
 
     function navigationToScreenTab() {
@@ -51,15 +47,7 @@ export default function LoginScreenEmail () {
 
                 <View style={styles.containerContants}>
 
-                    {/* <Input 
-                        keyboardType="numeric"
-                        label="Endereço de E-mail"
-                        placeholder="ex. contato@email.com"
-                        leftIcon={ User }
-                        marginVertical={16}
-                    /> */}
-
-                    <View style = {{ flex : 1, flexDirection : 'row' }} >
+                    <View style = {{ flex : 1, flexDirection : 'column' }} >
                         <Input 
                             label = "Endereço de E-mail"
                             placeholder = "ex. contato@email.com"
@@ -77,15 +65,6 @@ export default function LoginScreenEmail () {
                             onChangeText={ text => setPassword(text) }
                         />
                     </View>
-
-                    <Input 
-                        label = "Password"
-                        placeholder = "texto"
-                        marginVertical = { 16 }
-                        value={text}
-                        textValues = { checkText() }
-                        onChangeText={ text => setText(text) }
-                    />
 
                     <Button
                         label="Avançar para Tab Screen" 
