@@ -47,31 +47,31 @@ export default function LoginScreenEmail () {
 
                 <View style={styles.containerContants}>
 
-                    <View style = {{ flex : 1, flexDirection : 'column' }} >
-                        <Input 
-                            label = "Endereço de E-mail"
-                            placeholder = "ex. contato@email.com"
-                            marginVertical = { 16 }
-                            value={email}
-                            textValues = { checkEmail() }
-                            onChangeText={ text => setEmail(text) }
-                        />
-                        <Input 
-                            label = "Password"
-                            placeholder = "texto"
-                            marginVertical = { 16 }
-                            value={password}
-                            textValues = { checkPassword() }
-                            onChangeText={ text => setPassword(text) }
-                        />
-                    </View>
-
                     <Button
                         label="Avançar para Tab Screen" 
                         type = "solid"
                         color="blue" 
                         rightIcon={ ChevronRight } 
                         onPress={()=>{navigationToScreenTab()}}
+                        marginVertical={6}
+                    />
+
+                    <Button
+                        label="Avançar para Tab Screen" 
+                        type = "outlined"
+                        color="blue" 
+                        rightIcon={ ChevronRight } 
+                        onPress={()=>{navigationToScreenTab()}}
+                        marginVertical={6}
+                    />
+
+                    <Button
+                        label="Avançar para Tab Screen" 
+                        type = "text"
+                        color="blue" 
+                        rightIcon={ ChevronRight } 
+                        onPress={()=>{navigationToScreenTab()}}
+                        marginVertical={6}
                     />
                     
                 </View>

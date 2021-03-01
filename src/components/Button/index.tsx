@@ -42,6 +42,15 @@ const Button: React.FC<ButtonProps> = ({
             case "noEvidence": return Colors.noEvidence
         }
     }
+    
+    const colorContant = ( type, color ) => {
+        switch (type) {
+            case "solid":
+                return Colors.white;
+            default:
+                return colorButton(color);
+        }
+    }
 
     const typeButton = ( type, color) => {
         switch (type) {
@@ -52,13 +61,43 @@ const Button: React.FC<ButtonProps> = ({
                         backgroundColor : colorButton(color)
                     }]
             case "outlined":
-            
-                break;
+                return [
+                    styles.borderRadius,
+                    {
+                        borderWidth : 1.5,
+                        borderColor : colorButton(color)
+                    }]
             case "tabBar":
             
                 break;
             default:
                 break;
+        }
+    }
+
+    const flexContaint = ( type ) => {
+        switch (type) {
+            case "tabBar":
+                return [
+                    styles.flexDirectionRow
+                ]
+            default :
+                return [
+                    styles.flexDirectionRow
+                ]
+        }
+    }
+
+    const fontSize = ( type ) => {
+        switch (type) {
+            case "tabBar":
+                return [
+                    styles.textSizeTabBar
+                ]
+            default :
+                return [
+                    styles.textSize
+                ]
         }
     }
 
@@ -74,13 +113,14 @@ const Button: React.FC<ButtonProps> = ({
                     }
                 ]}
                 onPress={ () => onPress }
+                {...rest}
             >
-                <View style={[styles.containerText, styles.flexDirectionColumn]}>
-                    {createIconReact(leftIcon, color)}
-                    <Text style={[styles.textSizeTabBar, { color: color }]}>
+                <View style={[styles.containerText, flexContaint( type ) ]}>
+                    {createIconReact(leftIcon, colorContant( type, color ))}
+                    <Text style={[ fontSize( type ), { marginHorizontal: 8, color: colorContant( type, color ) }]}>
                         {label}
                     </Text>
-                    {createIconReact(rightIcon, color)}
+                    {createIconReact(rightIcon, colorContant( type, color ))}
                 </View>
             </TouchableOpacity>
         </>
@@ -119,28 +159,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
-    text: {
-        textAlign: 'center',
-        marginHorizontal: 16,
-    },
-
     textSize: {
-        fontSize: 16,
+        fontSize: 15,
     },
 
     //#endregion Estilos Globais.
-
-    //#region Estilos Botao solido ( Fundo preeenchido ).
-
-
-    //#endregion
-
-    //#region Estilos Botao c/ bordas.
-    buttonOutlined: {
-        borderWidth: 1,
-    },
-
-    //#endregion Estilos Botao c/ bordas.
 
     //#region Estilos TabBar.
     textSizeTabBar: {
