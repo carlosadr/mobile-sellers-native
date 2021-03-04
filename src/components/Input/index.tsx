@@ -23,7 +23,6 @@ interface InputProps extends TextInputProps {
     marginVertical : number,
     leftIcon : Element,
     rightIcon : Element,
-    onPress : Function,
 }
 
 const Input: React.FC<InputProps> = ({
@@ -34,7 +33,6 @@ const Input: React.FC<InputProps> = ({
     marginHorizontal,
     leftIcon,
     rightIcon,
-    onPress,
     ...rest }) => {
 
     const [value, setValue] = useState(false)
@@ -83,12 +81,12 @@ const Input: React.FC<InputProps> = ({
 
         return {
             top : position.interpolate({
-                inputRange: [0, 1],
-                outputRange: [20, -8],
+                inputRange: [ 0, 1 ],
+                outputRange: [ 16 , -2],
             }),
             left : position.interpolate({
-                inputRange: [0, 1],
-                outputRange: [ width*5 , 30],
+                inputRange: [ 0 , 1],
+                outputRange: [ leftIcon ? width > 2.5 ? width*16 : width*20 : width*5 , leftIcon ? 45 : 30],
             }),
             fontSize : state ? props.labelSiza : props.floatLabelSize,
             color : state ? props.labelDefaultColor : props.labelFocusColor,
@@ -115,14 +113,19 @@ const Input: React.FC<InputProps> = ({
         return state ? props.labelDefaultColor : props.labelFocusColor
     }
 
+    const returnAnimatedBorder = () => {
+    
+        return state ? 1.5 : 0
+    }
+
     return (
         <>
             <View
                 style={[
                     styles.containerInput,
-                    styles.borderSolidInInput,
                     styles.borderRadiusFull,
                     {
+                        borderWidth : returnAnimatedBorder(),
                         borderColor : returnAnimatedStyles(),
                         marginHorizontal: marginHorizontal,
                         marginVertical: marginVertical,
@@ -150,7 +153,7 @@ const Input: React.FC<InputProps> = ({
                     { ...rest }
                 />
 
-                <TouchableOpacity onPress={ () => onPress }>
+                <TouchableOpacity style={ rightIcon ? {} : {marginRight : 42} } { ...rest }>
                     {createIconReact(rightIcon, returnAnimatedStyles())}
                 </TouchableOpacity>
             </View>
@@ -162,6 +165,7 @@ export default Input;
 
 const styles = StyleSheet.create({
     containerInput: {
+        backgroundColor : "#ffffff",
         flex: 1,
         flexDirection: 'row',
         width: '100%',
@@ -186,7 +190,7 @@ const styles = StyleSheet.create({
     text: {
         position: 'absolute',
         textAlign: 'center',
-        backgroundColor: Colors.white,
+        padding : 3,
     },
 
     textInput: {

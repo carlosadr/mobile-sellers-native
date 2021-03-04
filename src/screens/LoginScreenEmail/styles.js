@@ -2,12 +2,16 @@ import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 
 const screen = Dimensions.get('screen');
-var font = 14, altura = '22%', padding = '8%';
+var font = 15, altura, padding;
 
-if (screen.height > 800) {
-    font += 2;
-    altura = '25%';
+if (screen.scale > 2.5) {
+    font -= 0.8;
+    altura = '28%';
     padding = '15%';
+} else {
+    font -= 1.5;
+    altura = '24%';
+    padding = '10%';
 }
 
 const styles = StyleSheet.create({
@@ -15,6 +19,7 @@ const styles = StyleSheet.create({
         flex : 1,
         resizeMode : 'contain',
         width : '100%',
+        minHeight : '95%',
         backgroundColor : '#F4F6F9',
     },
 
@@ -30,6 +35,7 @@ const styles = StyleSheet.create({
 
     containerHeader : {
         height : altura,
+        minHeight : 150,
         marginBottom : '12%',
         padding : padding,
         alignItems : 'center',
@@ -41,7 +47,7 @@ const styles = StyleSheet.create({
         maxHeight: 100,
         justifyContent : 'center',
         alignItems : 'center',
-        paddingHorizontal : '15%',
+        paddingHorizontal : 25,
     },
 
     text : {
@@ -54,7 +60,8 @@ const styles = StyleSheet.create({
         flex : 5,
         width: '100%',
         height: '100%',
-        padding : 8,
+        paddingVertical : 8,
+        paddingHorizontal : "4%",
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -63,6 +70,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    containerButtonLost : { 
+        flex : 0.5,
+        marginLeft : "40%",
     },
 
     buttonTouchable : {

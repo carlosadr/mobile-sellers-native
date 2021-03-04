@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
-import { ChevronRight, Eye, Lock } from 'react-native-feather';
+import { User, Eye, EyeOff, Lock, ChevronLeft } from 'react-native-feather';
 
 import imgBackground from "../../../assets/background-2.png";
 import imgLogo from "../../../assets/logo.png";
 
-// import * as Icon from "../../components/Buttons";
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import * as Colors from '../../components/Colors';
 
 import styles from './styles';
+import { set } from 'react-native-reanimated';
 
 export default function LoginScreenEmail () {
 
@@ -19,12 +19,21 @@ export default function LoginScreenEmail () {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [state, setState] = useState(false);
 
     const checkEmail = () => {
         return email ? false : true
     }
     const checkPassword = () => {
         return password ? false : true
+    }
+    const checkInputs = () => {
+        return email && password ? "solid" : "outlined"
+    }
+
+    function navigationBack() {
+        console.log("Botao de ir para Tab Screen acionado.")
+        navigation.goBack();
     }
 
     function navigationToScreenTab() {
@@ -47,34 +56,52 @@ export default function LoginScreenEmail () {
 
                 <View style={styles.containerContants}>
 
-                    <Button
-                        label="Avançar para Tab Screen" 
-                        type = "solid"
-                        color="blue" 
-                        rightIcon={ ChevronRight } 
-                        onPress={()=>{navigationToScreenTab()}}
-                        marginVertical={6}
+                    <Input 
+                        label = "Endereço de E-mail"
+                        placeholder = "ex. contato@email.com"
+                        leftIcon = {User}
+                        marginVertical = { 6 }
+                        value={ email }
+                        textValues = { checkEmail() }
+                        onChangeText={ text => setEmail(text) }
                     />
 
-                    <Button
-                        label="Avançar para Tab Screen" 
-                        type = "outlined"
-                        color="blue" 
-                        rightIcon={ ChevronRight } 
-                        onPress={()=>{navigationToScreenTab()}}
-                        marginVertical={6}
+                    <Input 
+                        label = "Senha"
+                        mask = "password"
+                        leftIcon = {Lock}
+                        rightIcon = { state ? Eye : EyeOff }
+                        marginVertical = { 6 }
+                        value={password}
+                        textValues = { checkPassword() }
+                        onChangeText={ text => setPassword(text) }
+                        onPress={ () => state ? setState(false) : setState(true)}
                     />
 
-                    <Button
-                        label="Avançar para Tab Screen" 
-                        type = "text"
-                        color="blue" 
-                        rightIcon={ ChevronRight } 
-                        onPress={()=>{navigationToScreenTab()}}
-                        marginVertical={6}
-                    />
-                    
+                    <View style={ styles.containerButtonLost } >
+                        <Button 
+                            label = "Esqueci minha senha." 
+                            color = "blue"
+                        />
+                    </View>
                 </View>
+
+                <View style={{ flex : 3.5, paddingTop : 40, paddingHorizontal : 35  }}>
+                    <Button
+                        label = "Entrar"
+                        type = { checkInputs() }
+                        color = "blue"
+                        onPress = { () => email && password ? navigationToScreenTab() : {} }
+                    />
+                </View>
+                <Button
+                    label = ""
+                    leftIcon = {ChevronLeft}
+                    type = "text"
+                    color = "orange"
+                    style = {{ width : "25%", height : 50 }}
+                    onPress = { () => navigationBack() }
+                />
             </View>
         </ImageBackground>
     )

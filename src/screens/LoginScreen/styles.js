@@ -2,10 +2,10 @@ import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 
 const screen = Dimensions.get('screen');
-var font = 14, altura = '22%', padding = '8%';
+var font = 15.5, altura = '22%', padding = '8%';
 
 if (screen.height > 800) {
-    font += 2;
+    font += 2.5;
     altura = '25%';
     padding = '15%';
 }

@@ -15,7 +15,6 @@ interface ButtonProps {
     marginHorizontal: number,
     leftIcon: Element,
     rightIcon: Element,
-    onPress: Function,
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,7 +25,6 @@ const Button: React.FC<ButtonProps> = ({
     marginHorizontal,
     leftIcon,
     rightIcon,
-    onPress,
     ...rest }) => {
 
     function createIconReact(icon, color) {
@@ -112,15 +110,27 @@ const Button: React.FC<ButtonProps> = ({
                         marginVertical: marginVertical,
                     }
                 ]}
-                onPress={ () => onPress }
                 {...rest}
             >
                 <View style={[styles.containerText, flexContaint( type ) ]}>
+
                     {createIconReact(leftIcon, colorContant( type, color ))}
-                    <Text style={[ fontSize( type ), { marginHorizontal: 8, color: colorContant( type, color ) }]}>
+
+                    <Text 
+                        style={[ 
+                            fontSize( type ), 
+                            { 
+                                marginHorizontal: 8, 
+                                color: colorContant( type, color ) 
+                            }
+                        ]}>
+
                         {label}
+                        
                     </Text>
+
                     {createIconReact(rightIcon, colorContant( type, color ))}
+
                 </View>
             </TouchableOpacity>
         </>

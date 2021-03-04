@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import ViewPager from '@react-native-community/viewpager'
 
 import { View, Image, ImageBackground } from 'react-native';
-import { OnlyText } from '../../components/Buttons'
+import Button from '../../components/Button'
 
 import * as Colors from '../../components/Colors';
 
@@ -18,8 +18,8 @@ import WelcomeFristScreen from './welcome-frist';
 import WelcomeLastScreen from './welcome-last';
 
 export default function WelcomeScreen () {
-    const [selectedPage, setSelectedPage] = useState(0);
-    const [visible, setVisible] = useState(Colors.noEvidence);
+
+    const [visible, setVisible] = useState("noEvidence");
     const [disabled, setDisabled] = useState(true);
 
     const navigation = useNavigation();
@@ -29,11 +29,11 @@ export default function WelcomeScreen () {
     }
 
     function visibleElements(position) {
-        if( position > 0 && visible === Colors.noEvidence){
-            setVisible(Colors.orange)
+        if( position > 0 && visible === "noEvidence" ){
+            setVisible("orange")
             setDisabled(false)
         }else{
-            setVisible(Colors.noEvidence)
+            setVisible("noEvidence")
             setDisabled(true)
         }
     }
@@ -51,8 +51,8 @@ export default function WelcomeScreen () {
                     style={styles.viewPager}
                     initialPage={0}
                     scrollEnabled={true}
-                    onPageSelected={(event) => {
-                        console.log(event.nativeEvent.position)
+                    onPageSelected={( event ) => {
+                        console.log( event.nativeEvent.position + " is disabled: " + disabled )
                         visibleElements(event.nativeEvent.position)
                     }}
                     >
@@ -62,12 +62,12 @@ export default function WelcomeScreen () {
 
                 <View style= {styles.containerButtons}>
                     <View style={{ flex : 2.5 }} />
-                    <OnlyText 
+                    <Button 
                         label="Avançar"
                         color={visible}
                         disabled={disabled}
                         rightIcon={ChevronRight}
-                        onPress={ () => { navigationToLogIn() }}
+                        onPress={ () => { navigationToLogIn() } }
                     />
                 </View>
             </View>
