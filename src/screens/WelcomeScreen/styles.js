@@ -4,11 +4,11 @@ import Constants from 'expo-constants';
 const screen = Dimensions.get('screen');
 var fontH1 = 26, fontP = 18, altura = '4%', top = '18%';
 
-if (screen.height > 800) {
+if (screen.scale > 2.5) {
     fontH1 += 4;
     fontP += 2;
 
-    altura = '15%'
+    altura = '10%'
     top = '10%'
 }
 
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '125%',
         marginTop: 16,
-        marginBottom: 26,
+        marginBottom: 18,
         resizeMode: 'contain',
         alignContent: 'flex-end',
     },

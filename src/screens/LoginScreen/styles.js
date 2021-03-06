@@ -2,12 +2,16 @@ import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 
 const screen = Dimensions.get('screen');
-var font = 15.5, altura = '22%', padding = '8%';
+var font = 15, altura, padding;
 
-if (screen.height > 800) {
-    font += 2.5;
-    altura = '25%';
+if (screen.scale > 2.5) {
+    font -= 0.8;
+    altura = '28%';
     padding = '15%';
+} else {
+    font -= 1.5;
+    altura = '24%';
+    padding = '10%';
 }
 
 const styles = StyleSheet.create({

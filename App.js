@@ -6,7 +6,7 @@ import Routes from "./src/routes";
 
 export default function App() {
   return (
-    <View style = {{  flex : 1, maxHeight : "128%", minHeight : "100%" }}>
+    <View style = {{  flex : 1 }}>
       <StatusBar style="light" />
       <Routes/>
     </View>
