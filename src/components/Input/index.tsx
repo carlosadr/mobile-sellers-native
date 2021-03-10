@@ -25,7 +25,7 @@ interface InputProps extends TextInputProps {
     marginVertical : number,
     leftIcon : Element,
     rightIcon : Element,
-    inputMaskChange : any,
+    inputMaskChange : Function,
 }
 
 const Input: React.FC<InputProps> = ({
@@ -88,8 +88,6 @@ const Input: React.FC<InputProps> = ({
             labelFocusColor: Colors.noEvidence,
         };
 
-        console.log(width);
-
         return {
             top : position.interpolate({
                 inputRange: [ 0, 1 ],
@@ -111,7 +109,6 @@ const Input: React.FC<InputProps> = ({
             visible: Colors.noEvidence,
         };
 
-        console.log("placeholder is visible : " + state)
         return state ? props.visible : props.notVisible
     }
 
@@ -125,7 +122,6 @@ const Input: React.FC<InputProps> = ({
     }
 
     const returnAnimatedBorder = () => {
-    
         return state ? 1.5 : 0
     }
 

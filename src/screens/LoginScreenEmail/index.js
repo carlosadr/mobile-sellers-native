@@ -10,6 +10,8 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 import styles from './styles';
+import api from '../../service/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreenEmail () {
 
@@ -34,9 +36,24 @@ export default function LoginScreenEmail () {
         navigation.goBack();
     }
 
-    function navigationToScreenTab() {
-        console.log("Botao de ir para Tab Screen acionado.")
-        navigation.navigate('ScreenTab');
+    async function handleLogin() {
+        const data = {
+            email : email,
+            password : password,
+        }
+
+        const response = await api.post('/loginVendedor/', data
+        ).then(function(response){
+            const setToken = async (token) => await AsyncStorage.setItem('@MarkBase:token', token)
+
+            setToken(response.data.token);
+
+            navigation.navigate('ScreenTab')
+
+        }).catch(function(){
+            console.log("Confira seus dados e tente novamente.")
+            return ""
+        })
     }
 
     return(
@@ -80,7 +97,6 @@ export default function LoginScreenEmail () {
                         <Button 
                             label = "Esqueci minha senha." 
                             color = "blue"
-                            onPress = { () => {  } }
                         />
                     </View>
                 </View>
@@ -90,7 +106,7 @@ export default function LoginScreenEmail () {
                         label = "Entrar"
                         type = { checkInputs() }
                         color = "blue"
-                        onPress = { () => email && password ? navigationToScreenTab() : {} }
+                        onPress = { () => email && password ? handleLogin() : {} }
                     />
                 </View>
                 <Button
