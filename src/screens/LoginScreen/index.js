@@ -17,6 +17,9 @@ export default function LoginScreen () {
     function navigationToLogInEmail() {
         navigation.navigate('LoginScreenEmail');
     }
+    function navigationToRegisterScreen() {
+        navigation.navigate('RegisterScreen');
+    }
 
     return(
         <ImageBackground style={styles.imgBackground} source={ imgBackground }>
@@ -60,7 +63,7 @@ export default function LoginScreen () {
                             Você é novo por aqui? {" "}
                         </Text>
                         
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigationToRegisterScreen()}>
                             <Text style={ [styles.text, { fontWeight : '700'}] }>
                                 Cadastre-se.
                             </Text>
