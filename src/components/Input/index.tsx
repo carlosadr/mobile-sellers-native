@@ -9,7 +9,9 @@ import {
     Dimensions,
 } from 'react-native';
 
-import * as Colors from '../Colors';
+import { maskCep, maskPhone } from '../utils/Masks';
+
+import * as Colors from '../utils/Colors';
 
 interface InputProps extends TextInputProps {
     label : string,
@@ -23,6 +25,7 @@ interface InputProps extends TextInputProps {
     marginVertical : number,
     leftIcon : Element,
     rightIcon : Element,
+    inputMaskChange : any,
 }
 
 const Input: React.FC<InputProps> = ({
@@ -33,11 +36,12 @@ const Input: React.FC<InputProps> = ({
     marginHorizontal,
     leftIcon,
     rightIcon,
+    inputMaskChange,
     ...rest }) => {
 
+    const [state, setState] = useState(false)
     const [value, setValue] = useState(false)
     const [position, setPosition] = useState(new Animated.Value(value ? 1 : 0))
-    const [state, setState] = useState(false)
     const [width, setWidth] = useState(Dimensions.get("screen").scale)
 
     const createIconReact = (icon, color) => {
@@ -45,6 +49,13 @@ const Input: React.FC<InputProps> = ({
             return React.createElement(icon, { color: color, marginHorizontal: 8 })
         }
         return
+    }
+
+    const handleChange = ( value : string ) => {
+        switch (mask) {
+            case 'cep' : return inputMaskChange(maskCep(value));
+            case 'phone' : return inputMaskChange(maskPhone(value));
+        }
     }
 
     const handleFocus = () => {
@@ -150,6 +161,7 @@ const Input: React.FC<InputProps> = ({
                     placeholderTextColor={returnAnimatedPlaceholderStyles()} 
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    onChangeText={ (text : string) => handleChange(text) }
                     { ...rest }
                 />
 

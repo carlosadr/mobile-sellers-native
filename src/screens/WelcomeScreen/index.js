@@ -5,8 +5,6 @@ import ViewPager from '@react-native-community/viewpager'
 import { View, Image, ImageBackground } from 'react-native';
 import Button from '../../components/Button'
 
-import * as Colors from '../../components/Colors';
-
 import { ChevronRight } from 'react-native-feather';
 
 import styles from './styles';

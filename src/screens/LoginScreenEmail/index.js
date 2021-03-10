@@ -8,10 +8,8 @@ import imgLogo from "../../../assets/logo.png";
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-import * as Colors from '../../components/Colors';
 
 import styles from './styles';
-import { set } from 'react-native-reanimated';
 
 export default function LoginScreenEmail () {
 
@@ -19,7 +17,7 @@ export default function LoginScreenEmail () {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [state, setState] = useState(false);
+    const [state, setState] = useState(true);
 
     const checkEmail = () => {
         return email ? false : true
@@ -57,22 +55,22 @@ export default function LoginScreenEmail () {
                 <View style={styles.containerContants}>
 
                     <Input 
+                        value={ email }
                         label = "Endereço de E-mail"
                         placeholder = "ex. contato@email.com"
                         leftIcon = {User}
                         marginVertical = { 6 }
-                        value={ email }
                         textValues = { checkEmail() }
-                        onChangeText={ text => setEmail(text) }
+                        onChangeText = { text => setEmail(text) }
                     />
 
                     <Input 
-                        label = "Senha"
-                        mask = "password"
-                        leftIcon = {Lock}
-                        rightIcon = { state ? Eye : EyeOff }
-                        marginVertical = { 6 }
                         value={password}
+                        label = "Senha"
+                        leftIcon = {Lock}
+                        rightIcon = { state ? EyeOff : Eye }
+                        marginVertical = { 6 }
+                        secureTextEntry = {state}
                         textValues = { checkPassword() }
                         onChangeText={ text => setPassword(text) }
                         onPress={ () => state ? setState(false) : setState(true)}
@@ -82,6 +80,7 @@ export default function LoginScreenEmail () {
                         <Button 
                             label = "Esqueci minha senha." 
                             color = "blue"
+                            onPress = { () => {  } }
                         />
                     </View>
                 </View>
