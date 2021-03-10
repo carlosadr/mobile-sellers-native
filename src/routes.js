@@ -6,7 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
+import FristStep from './screens/RegisterScreen/FristStep';
+import LastStep from './screens/RegisterScreen/LastStep';
 import LoginScreenEmail from './screens/LoginScreenEmail';
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +31,8 @@ export default function Routes() {
                 screenOptions={{ headerShown : false }}>
                 <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
                 <Stack.Screen name="LoginScreen" component={ LoginScreen } />
-                <Stack.Screen name="RegisterScreen" component={ RegisterScreen } />
+                <Stack.Screen name="FristStep" component={ FristStep } />
+                <Stack.Screen name="LastStep" component={ LastStep } />
                 <Stack.Screen name="LoginScreenEmail" component={ LoginScreenEmail } />
                 <Stack.Screen name="ScreenTab" component={ ScreenTab } />
             </Stack.Navigator>

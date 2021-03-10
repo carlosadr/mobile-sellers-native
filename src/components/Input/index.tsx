@@ -9,7 +9,7 @@ import {
     Dimensions,
 } from 'react-native';
 
-import { maskCep, maskPhone } from '../utils/Masks';
+import { maskCep, maskCpfOrCnpj, maskPhone } from '../utils/Masks';
 
 import * as Colors from '../utils/Colors';
 
@@ -19,8 +19,10 @@ interface InputProps extends TextInputProps {
     mask : 
         "cep" | 
         "phone" | 
-        "password"
+        "password" |
+        "cpf_cnpj"
     ,
+    flex : number,
     marginHorizontal : number,
     marginVertical : number,
     leftIcon : Element,
@@ -32,6 +34,7 @@ const Input: React.FC<InputProps> = ({
     label,
     textValues,
     mask,
+    flex,
     marginVertical,
     marginHorizontal,
     leftIcon,
@@ -55,6 +58,7 @@ const Input: React.FC<InputProps> = ({
         switch (mask) {
             case 'cep' : return inputMaskChange(maskCep(value));
             case 'phone' : return inputMaskChange(maskPhone(value));
+            case 'cpf_cnpj' : return inputMaskChange(maskCpfOrCnpj(value));
         }
     }
 
@@ -136,6 +140,7 @@ const Input: React.FC<InputProps> = ({
                         borderColor : returnAnimatedStyles(),
                         marginHorizontal: marginHorizontal,
                         marginVertical: marginVertical,
+                        flex : flex ? flex : 1,
                     }
                 ]}
             >
@@ -161,7 +166,7 @@ const Input: React.FC<InputProps> = ({
                     { ...rest }
                 />
 
-                <TouchableOpacity style={ rightIcon ? {} : {marginRight : 42} } { ...rest }>
+                <TouchableOpacity style={ !rightIcon ? {} : {marginLeft : 8} } { ...rest }>
                     {createIconReact(rightIcon, returnAnimatedStyles())}
                 </TouchableOpacity>
             </View>
@@ -174,7 +179,6 @@ export default Input;
 const styles = StyleSheet.create({
     containerInput: {
         backgroundColor : "#ffffff",
-        flex: 1,
         flexDirection: 'row',
         width: '100%',
         maxHeight: 60,

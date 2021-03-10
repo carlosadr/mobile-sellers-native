@@ -18,7 +18,7 @@ export default function LoginScreen () {
         navigation.navigate('LoginScreenEmail');
     }
     function navigationToRegisterScreen() {
-        navigation.navigate('RegisterScreen');
+        navigation.navigate('FristStep');
     }
 
     return(
