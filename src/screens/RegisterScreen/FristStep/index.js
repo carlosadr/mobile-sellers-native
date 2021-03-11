@@ -23,6 +23,9 @@ export default function FristStep () {
     const [textError, setTextError] = useState("")
 
     function handleMask( value ) {
+        if (cpfOrCnpj.length < 10){
+            setTextError("")
+        }
         setCpfOrCnpj(value)
     }
 
