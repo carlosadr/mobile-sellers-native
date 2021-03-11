@@ -35,12 +35,12 @@ export default function FristStep () {
 
     async function navigateToLastStep() {
         const data = {
+            cpf_cnpj : cpfOrCnpj.replace(/\D/g, ""),
             name : name,
             lastName : lastName,
             email : email,
-            cpfOrCnpj : cpfOrCnpj.replace(/\D/g, "")
         }
-
+        
         await api.get(`vendedor/${cpfOrCnpj.replace(/\D/g, "")}`)
         .then(function() {
             return setTextError("CPF ou CNPJ já está cadastrado.")
