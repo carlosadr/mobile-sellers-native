@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     View,
     Animated,
+    Text,
     TextInput,
     TextInputProps,
     TouchableOpacity,
@@ -15,6 +16,7 @@ import * as Colors from '../utils/Colors';
 
 interface InputProps extends TextInputProps {
     label : string,
+    errorMsg : string,
     textValues : boolean,
     mask : 
         "cep" | 
@@ -32,6 +34,7 @@ interface InputProps extends TextInputProps {
 
 const Input: React.FC<InputProps> = ({
     label,
+    errorMsg,
     textValues,
     mask,
     flex,
@@ -102,7 +105,7 @@ const Input: React.FC<InputProps> = ({
                 outputRange: [ leftIcon ? width > 2.5 ? width*16 : width*20 : width*5 , leftIcon ? 45 : 30],
             }),
             fontSize : state ? props.labelSiza : props.floatLabelSize,
-            color : state ? props.labelDefaultColor : props.labelFocusColor,
+            color : errorMsg ? Colors.orange : state ? props.labelDefaultColor : props.labelFocusColor,
             paddingHorizontal : state ? 4 : 10,
         }
     }
@@ -137,7 +140,7 @@ const Input: React.FC<InputProps> = ({
                     styles.borderRadiusFull,
                     {
                         borderWidth : returnAnimatedBorder(),
-                        borderColor : returnAnimatedStyles(),
+                        borderColor :  errorMsg ? Colors.orange : returnAnimatedStyles(),
                         marginHorizontal: marginHorizontal,
                         marginVertical: marginVertical,
                         flex : flex ? flex : 1,
@@ -165,6 +168,12 @@ const Input: React.FC<InputProps> = ({
                     onChangeText={ (text : string) => handleChange(text) }
                     { ...rest }
                 />
+                <Text style={[
+                        styles.textError,
+                        { color : Colors.orange }
+                    ]} >
+                    { errorMsg }
+                </Text>
 
                 <TouchableOpacity style={ !rightIcon ? {} : {marginLeft : 8} } { ...rest }>
                     {createIconReact(rightIcon, returnAnimatedStyles())}
@@ -207,8 +216,19 @@ const styles = StyleSheet.create({
 
     textInput: {
         flex: 3,
+        fontSize : 16,
         width: '100%',
         height: '100%',
         textAlign: 'center',
+    },
+
+    textError: {
+        position : 'absolute',
+        left : 35,
+        top : 62,
+        flex: 1,
+        fontSize : 10,
+        width: '100%',
+        height: '100%',
     }
 })

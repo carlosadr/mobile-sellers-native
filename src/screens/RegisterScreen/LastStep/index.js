@@ -10,14 +10,11 @@ import Input from '../../../components/Input';
 
 import styles from '../styles'
 
-export default function LastStep ( data ) {
+export default function LastStep ( {route} ) {
 
     const navigation = useNavigation();
 
-    const [name, setName] = useState( data.name)
-    const [lastName, setLastName] = useState(data.lastName)
-    const [email, setEmail] = useState(data.email)
-    const [cpfOrCnpj, setCpfOrCnpj] = useState(data.cpfOrCnpj)
+    const { name, lastName, email, cpfOrCnpj } = route.params;
 
     function handleMask( value ) {
         setCpfOrCnpj(value)

@@ -10,6 +10,7 @@ import Input from '../../../components/Input';
 
 import styles from '../styles'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import api from '../../../service/api';
 
 export default function FristStep () {
 
@@ -19,25 +20,30 @@ export default function FristStep () {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [cpfOrCnpj, setCpfOrCnpj] = useState("")
+    const [textError, setTextError] = useState("")
 
     function handleMask( value ) {
         setCpfOrCnpj(value)
-        console.log(value)
     }
 
     function navigationBack() {
         navigation.goBack();
     }
 
-    function navigateToLastStep() {
+    async function navigateToLastStep() {
         const data = {
             name : name,
             lastName : lastName,
             email : email,
-            cpfOrCnpj : cpfOrCnpj
+            cpfOrCnpj : cpfOrCnpj.replace(/\D/g, "")
         }
 
-        navigation.navigate('LastStep', data);
+        await api.get(`vendedor/${cpfOrCnpj.replace(/\D/g, "")}`)
+        .then(function() {
+            return setTextError("CPF ou CNPJ já está cadastrado.")
+        }).catch( function() {
+            navigation.navigate('LastStep', data)
+        })
     }
 
     function checkInputs() {
@@ -77,7 +83,7 @@ export default function FristStep () {
 
                         <View style={styles.containerRows}>
                             <Input
-                                value = {email}
+                                value = { email }
                                 textValues = { !email ? true : false }
                                 label="Endereço de e-mail"
                                 autoCorrect = {false}
@@ -89,7 +95,8 @@ export default function FristStep () {
 
                         <View style={styles.containerRows}>
                             <Input
-                                value = {cpfOrCnpj}
+                                value = { cpfOrCnpj }
+                                errorMsg = { textError }
                                 textValues = { !cpfOrCnpj ? true : false }
                                 mask = "cpf_cnpj"
                                 label="CPF ou CNPJ"
@@ -114,7 +121,7 @@ export default function FristStep () {
                             disabled = { !checkInputs() }
                             type={ checkInputs() ? "solid" : "outlined"}
                             color={ checkInputs() ? "blue" : "noEvidence"}
-                            onPress={() => navigateToLastStep()}
+                            onPress={ () => navigateToLastStep() }
                         />
                     </View>
                 </View>
