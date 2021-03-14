@@ -1,9 +1,12 @@
 import React from 'react';
+
+//#region Stack do React Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { PieChart, ShoppingBag, Package, Settings } from 'react-native-feather'
+//#endregion
 
+//#region Telas do APP;
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import FristStep from './screens/RegisterScreen/FristStep';
@@ -14,52 +17,75 @@ import DashboardScreen from './screens/DashboardScreen';
 import SalesScreen from './screens/SalesScreen';
 import ProductsScreen from './screens/ProductsScreen';
 import SettingsScreen from './screens/SettingsScreen';
+//#endregion
 
-const Tab = createBottomTabNavigator();
+//#region Imports importantes
+import Ionicons from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Colors from '../src/components/utils/Colors'
+//#endregion
 
-function ScreenTab() {
-    return(
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon : ({ focused, color, size }) => {
-                    if ( route.name === 'Dashboard' ) {
-                        return <PieChart color='#1AA1BE' size={8} />
-                    } else if ( route.name === 'Vendas' ) {
-                        return <ShoppingBag color='#1AA1BE' size={8} />
-                    } else if ( route.name === 'Produtos' ) {
-                        return <Package color='#1AA1BE' size={8} />
-                    } else if ( route.name === 'Configurações' ) {
-                        return <Settings color='#1AA1BE' size={8} />
-                    }
-                }
-            }), 
-            { headerShown : false }}
-            tabBarOptions = {{
-                activeTintColor : '#1AA1BE',
-                inactiveTintColor : '#C4C4C4'
-            }}>
-            <Tab.Screen name="Dashboard" component={ DashboardScreen } />
-            <Tab.Screen name="Vendas" component={ SalesScreen } />
-            <Tab.Screen name="Produtos" component={ ProductsScreen } />
-            <Tab.Screen name="Configurações" component={ SettingsScreen } />
-        </Tab.Navigator>
-    )
+const TOKEN = async () => { 
+    return await AsyncStorage.getItem('@MarkBase:token', () => { return null } )
 }
 
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+function ScreensTab () {
+    return (
+        <Tab.Navigator
+                    screenOptions={({ route }) => ({
+                        tabBarIcon: ({ focused, color, size }) => {
+                            let iconName;
+
+                            if ( route.name === "Dashboard" ) {
+                                iconName = "pie-chart"
+                            } else if ( route.name === "Vendas" ) {
+                                iconName = "shopping-bag"
+                            } else if ( route.name === "Produtos" ) {
+                                iconName = "package"
+                            } else if ( route.name === "Configurações" ) {
+                                iconName = "settings"
+                            }
+
+                            return <Ionicons name={iconName} size={size} color={color} />;
+
+                        },
+                    })}
+                    tabBarOptions={{
+                        activeTintColor: Colors.blue,
+                        inactiveTintColor: Colors.noEvidence,
+                    }}
+                >
+                    <Tab.Screen name='Dashboard' component={ DashboardScreen } />
+                    <Tab.Screen name='Vendas' component={ SalesScreen } />
+                    <Tab.Screen name='Produtos' component={ ProductsScreen } />
+                    <Tab.Screen name='Configurações' component={ SettingsScreen } />
+                </Tab.Navigator>
+    )
+}
 
 export default function Routes() {
     return(
         <NavigationContainer>
-            <Stack.Navigator 
-                screenOptions={{ headerShown : false }}>
-                <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
-                <Stack.Screen name="LoginScreen" component={ LoginScreen } />
-                <Stack.Screen name="FristStep" component={ FristStep } />
-                <Stack.Screen name="LastStep" component={ LastStep } />
-                <Stack.Screen name="LoginScreenEmail" component={ LoginScreenEmail } />
-                <Stack.Screen name="ScreenTab" component={ ScreenTab } />
-            </Stack.Navigator>
+            { TOKEN() ? (
+                <Stack.Navigator 
+                    screenOptions={{ headerShown : false }}>
+                    <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
+                    <Stack.Screen name="LoginScreen" component={ LoginScreen } />
+                    <Stack.Screen name="FristStep" component={ FristStep } />
+                    <Stack.Screen name="LastStep" component={ LastStep } />
+                    <Stack.Screen name="LoginScreenEmail" component={ LoginScreenEmail } />
+                    <Stack.Screen name="ScreensTab" component = { ScreensTab } />
+                </Stack.Navigator>
+            ) : (
+                <Stack.Navigator 
+                    screenOptions={{ headerShown : false }}>
+                    <Stack.Screen name="ScreensTab" component = { ScreensTab } />
+                    <Stack.Screen name="Routes" component = { Routes } />
+                </Stack.Navigator>
+            )}
         </NavigationContainer>
     )
 }

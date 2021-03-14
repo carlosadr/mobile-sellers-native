@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { getActionFromState, useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
 import { User, Eye, EyeOff, Lock, ChevronLeft } from 'react-native-feather';
 
@@ -36,19 +36,43 @@ export default function LoginScreenEmail () {
         navigation.goBack();
     }
 
+    async function setTokenLocal ( token ) {
+        console.log("\n" + token)
+        
+        return await AsyncStorage.setItem('@markbase_token', token);
+    }
+    async function setUserLocal ( cpf_cnpj ) {
+        console.log(cpf_cnpj)
+        return await AsyncStorage.setItem('@markbase_user', cpf_cnpj);
+    }
+
+    async function getTokenLocal (  ) {
+        value = await AsyncStorage.getItem('@markbase_token'); 
+        return value;
+    }
+    async function getUserLocal (  ) {
+        value = await AsyncStorage.getItem('@markbase_user'); 
+        return value;
+    }
+
     async function handleLogin() {
         const data = {
             email : email,
             password : password,
         }
 
-        const response = await api.post('/loginVendedor/', data
+        await api.post('/loginVendedor/', data
         ).then(function(response){
-            const setToken = async (token) => await AsyncStorage.setItem('@MarkBase:token', token)
 
-            setToken(response.data.token);
+            setTokenLocal(response.data.token);
+            setUserLocal(response.data.user.cpf_cnpj);
 
-            navigation.navigate('ScreenTab')
+            const tokenLocal = getTokenLocal()
+            const userLocal = getUserLocal()
+
+            console.log( "\n" + userLocal + "\n" + tokenLocal )
+
+            navigation.navigate('ScreensTab')
 
         }).catch(function(){
             console.log("Confira seus dados e tente novamente.")

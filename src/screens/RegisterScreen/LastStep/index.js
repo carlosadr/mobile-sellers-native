@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, Image, ImageBackground, Alert } from 'react-native';
-import {ChevronLeft, Lock, Eye, EyeOff} from 'react-native-feather';
+import { View, Text, Image, ImageBackground } from 'react-native';
+import {ChevronLeft, Eye, EyeOff} from 'react-feather';
 
 import imgBackground from "../../../../assets/background-2.png";
 import imgLogo from "../../../../assets/logo.png";
