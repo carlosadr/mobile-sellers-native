@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //#region Stack do React Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,9 +25,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Colors from '../src/components/utils/Colors'
 //#endregion
 
+const [ tokenLocal, setTokenLocal ] = useState()
+
 const TOKEN = async () => { 
-    return await AsyncStorage.getItem('@MarkBase:token', () => { return null } )
+    return await AsyncStorage.getItem('token', ( err, item ) => { setTokenLocal( item ) } )
 }
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -35,7 +38,7 @@ const Stack = createStackNavigator();
 function ScreensTab () {
     return (
         <Tab.Navigator
-                    screenOptions={({ route }) => ({
+        screenOptions={({ route }) => ({
                         tabBarIcon: ({ focused, color, size }) => {
                             let iconName;
 
@@ -48,9 +51,9 @@ function ScreensTab () {
                             } else if ( route.name === "Configurações" ) {
                                 iconName = "settings"
                             }
-
+                            
                             return <Ionicons name={iconName} size={size} color={color} />;
-
+                            
                         },
                     })}
                     tabBarOptions={{
@@ -67,11 +70,14 @@ function ScreensTab () {
 }
 
 export default function Routes() {
+    
+    TOKEN();
+
     return(
         <NavigationContainer>
-            { TOKEN() ? (
+            { tokenLocal ? (
                 <Stack.Navigator 
-                    screenOptions={{ headerShown : false }}>
+                screenOptions={{ headerShown : false }}>
                     <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
                     <Stack.Screen name="LoginScreen" component={ LoginScreen } />
                     <Stack.Screen name="FristStep" component={ FristStep } />

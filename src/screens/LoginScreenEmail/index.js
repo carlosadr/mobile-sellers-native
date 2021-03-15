@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { getActionFromState, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
 import { User, Eye, EyeOff, Lock, ChevronLeft } from 'react-native-feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import imgBackground from "../../../assets/background-2.png";
 import imgLogo from "../../../assets/logo.png";
 
-import Input from '../../components/Input'
-import Button from '../../components/Button'
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import styles from './styles';
 import api from '../../service/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreenEmail () {
-
     const navigation = useNavigation();
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    
     const [state, setState] = useState(true);
 
     const checkEmail = () => {
@@ -37,22 +37,13 @@ export default function LoginScreenEmail () {
     }
 
     async function setTokenLocal ( token ) {
-        console.log("\n" + token)
-        
-        return await AsyncStorage.setItem('@markbase_token', token);
-    }
-    async function setUserLocal ( cpf_cnpj ) {
-        console.log(cpf_cnpj)
-        return await AsyncStorage.setItem('@markbase_user', cpf_cnpj);
+        console.log("Token registrado com sucesso!")
+        return await AsyncStorage.setItem('token', token);
     }
 
-    async function getTokenLocal (  ) {
-        value = await AsyncStorage.getItem('@markbase_token'); 
-        return value;
-    }
-    async function getUserLocal (  ) {
-        value = await AsyncStorage.getItem('@markbase_user'); 
-        return value;
+    async function setUserLocal ( cpf_cnpj ) {
+        console.log("User registrado com sucesso!")
+        return await AsyncStorage.setItem('user', cpf_cnpj);
     }
 
     async function handleLogin() {
@@ -67,12 +58,7 @@ export default function LoginScreenEmail () {
             setTokenLocal(response.data.token);
             setUserLocal(response.data.user.cpf_cnpj);
 
-            const tokenLocal = getTokenLocal()
-            const userLocal = getUserLocal()
-
-            console.log( "\n" + userLocal + "\n" + tokenLocal )
-
-            navigation.navigate('ScreensTab')
+            navigation.navigate('ScreenTab');
 
         }).catch(function(){
             console.log("Confira seus dados e tente novamente.")
