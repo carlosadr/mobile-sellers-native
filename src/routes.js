@@ -25,13 +25,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Colors from '../src/components/utils/Colors'
 //#endregion
 
-const [ tokenLocal, setTokenLocal ] = useState()
-
-const TOKEN = async () => { 
-    return await AsyncStorage.getItem('token', ( err, item ) => { setTokenLocal( item ) } )
-}
-
-
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -59,6 +52,7 @@ function ScreensTab () {
                     tabBarOptions={{
                         activeTintColor: Colors.blue,
                         inactiveTintColor: Colors.noEvidence,
+                        style : { height: "10%", paddingBottom : 12 },
                     }}
                 >
                     <Tab.Screen name='Dashboard' component={ DashboardScreen } />
@@ -69,29 +63,48 @@ function ScreensTab () {
     )
 }
 
+function ScreensWelcome () {
+    return (
+        <Stack.Navigator 
+            screenOptions={{ 
+                headerShown : false 
+            }}
+        >
+            <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
+            <Stack.Screen name="LoginScreen" component={ LoginScreen } />
+            <Stack.Screen name="FristStep" component={ FristStep } />
+            <Stack.Screen name="LastStep" component={ LastStep } />
+            <Stack.Screen name="LoginScreenEmail" component={ LoginScreenEmail } />
+            <Stack.Screen name="ScreensTab" component = { ScreensTab } />
+        </Stack.Navigator>
+    )
+}
+
 export default function Routes() {
     
-    TOKEN();
+    const [ tokenLocal, setTokenLocal ] = useState()
+
+    const getTokenLocal = async () => { 
+        return await AsyncStorage.getItem('token', 
+            ( err, item ) => { 
+                item !== null ? console.log("Token está ativo!") : console.log("Token vázio.")
+                setTokenLocal( item );
+            } )
+    }
+
+    getTokenLocal()
 
     return(
         <NavigationContainer>
-            { tokenLocal ? (
-                <Stack.Navigator 
-                screenOptions={{ headerShown : false }}>
-                    <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
-                    <Stack.Screen name="LoginScreen" component={ LoginScreen } />
-                    <Stack.Screen name="FristStep" component={ FristStep } />
-                    <Stack.Screen name="LastStep" component={ LastStep } />
-                    <Stack.Screen name="LoginScreenEmail" component={ LoginScreenEmail } />
+            <Stack.Navigator 
+            screenOptions={{ headerShown : false }}>
+                { tokenLocal === null ? 
+                    <Stack.Screen name="ScreensWelcome" component = { ScreensWelcome } />
+                    :
                     <Stack.Screen name="ScreensTab" component = { ScreensTab } />
-                </Stack.Navigator>
-            ) : (
-                <Stack.Navigator 
-                    screenOptions={{ headerShown : false }}>
-                    <Stack.Screen name="ScreensTab" component = { ScreensTab } />
-                    <Stack.Screen name="Routes" component = { Routes } />
-                </Stack.Navigator>
-            )}
+                }
+                <Stack.Screen name="LoginScreenEmail" component = { LoginScreenEmail } />
+            </Stack.Navigator>
         </NavigationContainer>
     )
 }

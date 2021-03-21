@@ -58,7 +58,7 @@ export default function LoginScreenEmail () {
             setTokenLocal(response.data.token);
             setUserLocal(response.data.user.cpf_cnpj);
 
-            navigation.navigate('ScreenTab');
+            navigation.navigate('ScreensTab');
 
         }).catch(function(){
             console.log("Confira seus dados e tente novamente.")

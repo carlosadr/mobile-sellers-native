@@ -1,33 +1,40 @@
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+
 import { View, Text } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
 import Button from '../../components/Button'
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
+
+import Header from '../../components/Header';
 import styles from './styles'
 import api from '../../service/api'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function DashboardScreen () {
     const navigation = useNavigation();
 
     async function navigateToLogout() {
-        const TOKEN = async () => { return await AsyncStorage.getItem('MarkBase:token', () => {return ""}) }
-
-        await api.put('/logoutVendedor/', TOKEN() ).then( () => {
-            AsyncStorage.clear()
-
-            navigation.navigate('Routes')
-        } ).catch ( (response) => {
-            console.log( TOKEN() )
-            console.log("Erro desconhecido. " + response)
-        } )
+        AsyncStorage.clear()
+        navigation.navigate('LoginScreenEmail')
     }
 
     return (
-        <View style={{ justifyContent : 'center', alignItems : 'center', flex : 1 }}> 
-            <Text>Dashboard</Text>
+        <View>
+            <View style={ styles.containerHeader } >
+                <Header />
+            </View>
+            <View style={ styles.containerContants }>
+                <View style={ styles.containerFaturamento } >
 
-            <Button label="Logout" color="blue" type="text" onPress={ () => navigateToLogout() } />
+                </View>
+                <View style={ styles.containerVisitas }>
+
+                </View>
+                <FlatList style={styles.containerExtra}>
+
+                </FlatList>
+            </View>
         </View>
     )
 }
