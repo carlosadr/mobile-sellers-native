@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Ionicons from 'react-native-vector-icons/Feather';
-
+import { Bell } from 'react-feather';
 import * as Colors from '../utils/Colors';
 
 interface HeaderProps {
@@ -15,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
             <View style={ styles.containerLabel }>
                 <Image style={ styles.imageLogo } source={ require('../../../assets/logo.png') } />
                 <TouchableOpacity >
-                    <Ionicons name="bell" />
+                    <Bell size={ 16 }/>
                 </TouchableOpacity>
             </View>
         </>
