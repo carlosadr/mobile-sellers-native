@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { View, Text } from 'react-native'
+import { View, Text, ImageBackground } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import Button from '../../components/Button'
 
@@ -20,7 +20,7 @@ export default function DashboardScreen () {
     }
 
     return (
-        <View>
+        <ImageBackground style={{flex : 1}} source={require('../../../assets/background-2.png')}>
             <View style={ styles.containerHeader } >
                 <Header />
             </View>
@@ -35,6 +35,6 @@ export default function DashboardScreen () {
 
                 </FlatList>
             </View>
-        </View>
+        </ImageBackground>
     )
 }

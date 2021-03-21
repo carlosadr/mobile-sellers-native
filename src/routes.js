@@ -23,6 +23,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import Ionicons from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Colors from '../src/components/utils/Colors'
+import Constants from 'expo-constants';
 //#endregion
 
 const Tab = createBottomTabNavigator();
@@ -32,34 +33,35 @@ function ScreensTab () {
     return (
         <Tab.Navigator
         screenOptions={({ route }) => ({
-                        tabBarIcon: ({ focused, color, size }) => {
-                            let iconName;
+            tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+                    
+                    if ( route.name === "Dashboard" ) {
+                        iconName = "pie-chart"
+                    } else if ( route.name === "Vendas" ) {
+                        iconName = "shopping-bag"
+                    } else if ( route.name === "Produtos" ) {
+                        iconName = "package"
+                    } else if ( route.name === "Configurações" ) {
+                        iconName = "settings"
+                    }
+                    
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                    
+                },
+            })}
 
-                            if ( route.name === "Dashboard" ) {
-                                iconName = "pie-chart"
-                            } else if ( route.name === "Vendas" ) {
-                                iconName = "shopping-bag"
-                            } else if ( route.name === "Produtos" ) {
-                                iconName = "package"
-                            } else if ( route.name === "Configurações" ) {
-                                iconName = "settings"
-                            }
-                            
-                            return <Ionicons name={iconName} size={size} color={color} />;
-                            
-                        },
-                    })}
-                    tabBarOptions={{
-                        activeTintColor: Colors.blue,
-                        inactiveTintColor: Colors.noEvidence,
-                        style : { height: "10%", paddingBottom : 12 },
-                    }}
-                >
-                    <Tab.Screen name='Dashboard' component={ DashboardScreen } />
-                    <Tab.Screen name='Vendas' component={ SalesScreen } />
-                    <Tab.Screen name='Produtos' component={ ProductsScreen } />
-                    <Tab.Screen name='Configurações' component={ SettingsScreen } />
-                </Tab.Navigator>
+            tabBarOptions={{
+                activeTintColor: Colors.blue,
+                inactiveTintColor: Colors.noEvidence,
+                style : { height: "10%", paddingBottom : 12 },
+            }}
+        >
+            <Tab.Screen name='Dashboard' component={ DashboardScreen } />
+            <Tab.Screen name='Vendas' component={ SalesScreen } />
+            <Tab.Screen name='Produtos' component={ ProductsScreen } />
+            <Tab.Screen name='Configurações' component={ SettingsScreen } />
+        </Tab.Navigator>
     )
 }
 
@@ -69,7 +71,7 @@ function ScreensWelcome () {
             screenOptions={{ 
                 headerShown : false 
             }}
-        >
+            >
             <Stack.Screen name="WelcomeScreen" component={ WelcomeScreen } />
             <Stack.Screen name="LoginScreen" component={ LoginScreen } />
             <Stack.Screen name="FristStep" component={ FristStep } />
