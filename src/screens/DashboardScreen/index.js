@@ -2,7 +2,6 @@ import React from 'react'
 
 import { View, Text, ImageBackground } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import Button from '../../components/Button'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'

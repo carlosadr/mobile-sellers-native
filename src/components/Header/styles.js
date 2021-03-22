@@ -3,31 +3,25 @@ import * as Colors from '../utils/Colors';
 
 const styles = StyleSheet.create({
     containerHeader : {
+        width : '100%',
         height : '20%',
         maxHeight : 180,
-        paddingHorizontal : 8,
-
-        borderWidth : 1,
-        borderColor : "#3f58a0"
+        paddingHorizontal : 8
     },
 
     containerFristRow : {
         flexDirection : 'row',
         alignItems : 'center',
         justifyContent : 'space-between',
-        maxHeight : 40,
-
-        borderWidth : 1,
-        borderColor : "#fcfc55"
+        marginBottom : 20,
+        maxHeight : 40
     },
 
     containerLastRow : {
+        flex : 1,
         flexDirection : 'row',
         alignItems : 'center',
-        justifyContent : 'space-between',
-
-        borderWidth : 1,
-        borderColor : "#ff00ff"
+        justifyContent : 'space-between'
     },
 
     containerLogo : {
@@ -37,10 +31,33 @@ const styles = StyleSheet.create({
     },
 
     containerAvatar : {
-        height : 90,
-        width : 90,
+        flex : 1,
+        width : 85,
+        
+        marginRight : 8,
         resizeMode : 'contain'
     },
+
+    containerTexts : {
+        flex : 1,
+        flexDirection : 'row',
+        width : '100%',
+        justifyContent : 'space-between',
+    },
+
+    TextStore : {
+        color : Colors.white,
+    },
+
+    TextPlans : {
+        flex: 1,
+        color : Colors.white,
+        textAlign : 'right'
+    },
+
+    Text : {
+        fontSize : 18,
+    }
 })
 
 export default styles;
