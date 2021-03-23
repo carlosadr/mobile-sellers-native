@@ -14,8 +14,8 @@ interface ButtonProps {
     color: "white" | "blue" | "orange" | "chumbo" | "noEvidence",
     marginVertical: number,
     marginHorizontal: number,
-    leftIcon: Element,
-    rightIcon: Element,
+    leftIcon: any,
+    rightIcon: any,
 }
 
 const Button: React.FC<ButtonProps> = ({

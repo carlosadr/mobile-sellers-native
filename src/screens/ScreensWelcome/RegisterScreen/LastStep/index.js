@@ -3,13 +3,17 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
 import {ChevronLeft, Eye, EyeOff} from 'react-feather';
 
-import imgBackground from "../../../../assets/background-2.png";
-import imgLogo from "../../../../assets/logo.png";
-import Button from '../../../components/Button';
-import Input from '../../../components/Input';
+import { 
+    imgBackground,
+    imgLogo,
+} from '../../../../components/utils/Images'
+
+
+import Button from '../../../../components/Button';
+import Input from '../../../../components/Input';
 
 import styles from '../styles'
-import api from '../../../service/api';
+import api from '../../../../service/api';
 
 export default function LastStep ( {route} ) {
 

@@ -4,14 +4,16 @@ import { View, Text, Image, ImageBackground } from 'react-native';
 import { User, Eye, EyeOff, Lock, ChevronLeft } from 'react-native-feather';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import imgBackground from "../../../assets/background-2.png";
-import imgLogo from "../../../assets/logo.png";
+import { 
+    imgBackground,
+    imgLogo,
+} from '../../../components/utils/Images'
 
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Button from '../../../components/Button';
+import Input from '../../../components/Input';
 
 import styles from './styles';
-import api from '../../service/api';
+import api from '../../../service/api';
 
 export default function LoginScreenEmail () {
     const navigation = useNavigation();

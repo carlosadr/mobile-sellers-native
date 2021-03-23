@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import styles from '../styles';
-import img1 from '../../../../assets/images-welcome-screens/img1.png';
+import img1 from '../../../../../assets/images-welcome-screens/img1.png';
 
 export default function WelcomeFristScreen () {
     return(

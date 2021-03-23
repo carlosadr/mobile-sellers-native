@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
-import * as Color from '../../components/utils/Colors';
+import * as Color from '../../../components/utils/Colors';
 
 const screen = Dimensions.get('screen');
 var font = 15, altura, padding;
