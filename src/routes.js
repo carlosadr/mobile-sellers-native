@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //#region Stack do React Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,23 +7,22 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //#endregion
 
 //#region Telas do APP;
-import WelcomeScreen from './screens/WelcomeScreen';
-import LoginScreen from './screens/LoginScreen';
-import FristStep from './screens/RegisterScreen/FristStep';
-import LastStep from './screens/RegisterScreen/LastStep';
-import LoginScreenEmail from './screens/LoginScreenEmail';
+import WelcomeScreen from './screens/ScreensWelcome/WelcomeScreen';
+import LoginScreen from './screens/ScreensWelcome/LoginScreen';
+import FristStep from './screens/ScreensWelcome/RegisterScreen/FristStep';
+import LastStep from './screens/ScreensWelcome/RegisterScreen/LastStep';
+import LoginScreenEmail from './screens/ScreensWelcome/LoginScreenEmail';
 
-import DashboardScreen from './screens/DashboardScreen';
-import SalesScreen from './screens/SalesScreen';
-import ProductsScreen from './screens/ProductsScreen';
-import SettingsScreen from './screens/SettingsScreen';
+import DashboardScreen from './screens/ScreensTabs/DashboardScreen';
+import SalesScreen from './screens/ScreensTabs/SalesScreen';
+import ProductsScreen from './screens/ScreensTabs/ProductsScreen';
+import SettingsScreen from './screens/ScreensTabs/SettingsScreen';
 //#endregion
 
 //#region Imports importantes
 import Ionicons from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Colors from '../src/components/utils/Colors'
-import Constants from 'expo-constants';
 //#endregion
 
 const Tab = createBottomTabNavigator();
@@ -54,7 +53,7 @@ function ScreensTab () {
             tabBarOptions={{
                 activeTintColor: Colors.blue,
                 inactiveTintColor: Colors.noEvidence,
-                style : { height: "10%", paddingBottom : 12 },
+                style : { height: "8%", paddingBottom : 8 },
             }}
         >
             <Tab.Screen name='Dashboard' component={ DashboardScreen } />
@@ -94,7 +93,9 @@ export default function Routes() {
             } )
     }
 
-    getTokenLocal()
+    useEffect(() => {
+        getTokenLocal()
+    }, [])
 
     return(
         <NavigationContainer>
