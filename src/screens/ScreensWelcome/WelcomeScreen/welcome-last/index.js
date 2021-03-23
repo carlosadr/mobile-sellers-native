@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import styles from '../styles';
-import img2 from '../../../../assets/images-welcome-screens/img2.png';
+import img2 from '../../../../../assets/images-welcome-screens/img2.png';
 
 export default function WelcomeLastScreen () {
     return(

@@ -2,11 +2,13 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
 
-import imgBackground from "../../../assets/background-2.png";
-import imgLogo from "../../../assets/logo.png";
-import iconFacebook from "../../../assets/icons-social/icon-facebook.png";
-import iconGoogle from "../../../assets/icons-social/icon-google.png";
-import iconEmail from "../../../assets/icons-social/icon-email.png";
+import { 
+    imgBackground,
+    imgLogo,
+    iconFacebook,
+    iconGoogle,
+    iconEmail,
+} from '../../../components/utils/Images'
 
 import styles from './styles';
 

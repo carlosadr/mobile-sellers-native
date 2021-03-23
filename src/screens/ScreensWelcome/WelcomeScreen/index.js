@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import ViewPager from '@react-native-community/viewpager'
-
 import { View, Image, ImageBackground } from 'react-native';
-import Button from '../../components/Button'
+
+import ViewPager from '@react-native-community/viewpager'
 
 import { ChevronRight } from 'react-native-feather';
 
-import styles from './styles';
+import { 
+    imgBackground,
+    imgLogo,
+} from '../../../components/utils/Images'
 
-import imgBackground from '../../../assets/background.png';
-import logo from '../../../assets/logo.png';
+import Button from '../../../components/Button';
 
 import WelcomeFristScreen from './welcome-frist';
 import WelcomeLastScreen from './welcome-last';
+
+import styles from './styles';
 
 export default function WelcomeScreen () {
 
@@ -43,7 +46,7 @@ export default function WelcomeScreen () {
             
             <View style={styles.containerRouts}>
 
-                <Image source={logo} style={styles.imgLogo} />
+                <Image source={imgLogo} style={styles.imgLogo} />
 
                 <ViewPager 
                     style={styles.viewPager}
