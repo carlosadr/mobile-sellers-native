@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Bell } from 'react-native-feather';
-import * as Colors from '../utils/Colors';
 
 import styles from './styles';
-import api from '../../../src/service/api'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../../../src/service/api'
+
+import * as Colors from '../utils/Colors';
+import { defaultAvatar } from '../utils/Images';
 
 export default function Header () {
     const [ user, setUser ] = useState("")
     const [ dataUser, setDataUser ] = useState({})
-    const [ dataStore, setDataStore ] = useState({})
 
     async function getUserData () {
         await AsyncStorage.getItem('user', (err, item) => {
+            console.log(item)
             setUser(item);
         })
 
-        setDataUser( await api.get('/vendedor/' + user));
-        setDataStore( await api.get('/loja/' + user));
-        console.log(dataUser.data);
+        await api.get('/vendedor/' + user).then( ( response ) => {
+            console.log(response.data);
+            setDataUser(response.data);
+        });
     }
 
     useEffect(() => {
@@ -35,8 +38,11 @@ export default function Header () {
                 </TouchableOpacity>
             </View>
             <View style={styles.containerLastRow}>
-                <TouchableOpacity >
-                    <Image style={styles.containerAvatar} source={require('../../../assets/default-user.png')}/>
+
+                <TouchableOpacity 
+                    onPress= { () => { console.log("Botao Avatar foi precionado!") } }
+                >
+                    <Image style={styles.containerAvatar} source={defaultAvatar}/>
                 </TouchableOpacity>
 
                 <View style={styles.containerTexts} >
@@ -45,7 +51,7 @@ export default function Header () {
                             Nome da Loja
                         </Text>
                         <Text style={[styles.TextStore, styles.Text]}>
-                            { dataUser.data.name }
+                            { dataUser.name }
                         </Text>
                     </View>
 

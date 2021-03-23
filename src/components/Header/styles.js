@@ -3,7 +3,7 @@ import * as Colors from '../utils/Colors';
 
 const styles = StyleSheet.create({
     containerHeader : {
-        width : '100%',
+        flex : 1,
         height : '20%',
         maxHeight : 180,
         paddingHorizontal : 8
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         alignItems : 'center',
         justifyContent : 'space-between',
-        marginBottom : 20,
+        marginBottom : 8,
         maxHeight : 40
     },
 
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
 
     containerAvatar : {
         flex : 1,
-        width : 85,
+        width : 60,
         
-        marginRight : 8,
+        marginRight : 16,
         resizeMode : 'contain'
     },
 
