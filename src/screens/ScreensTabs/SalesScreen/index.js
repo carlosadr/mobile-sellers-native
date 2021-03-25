@@ -1,13 +1,31 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ImageBackground } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
+import { FlatList } from 'react-native-gesture-handler'
 
-import styles from './styles'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-export default function SalesScreen () {
+import { 
+    imgBackground,
+} from '../../../components/utils/Images'
+
+import Header from '../../../components/Header';
+import * as Colors from '../../../components/utils/Colors';
+import styles from './styles';
+import api from '../../../service/api';
+
+export default function DashboardScreen () {
     return (
-        <View style={{ justifyContent : 'center', alignItems : 'center', flex : 1 }}> 
-            <Text>Vendas</Text>
-        </View>
+        <ImageBackground style={{flex : 1}} source={ imgBackground }>
+            <View style={ styles.containerHeader } >
+                <Header />
+            </View>
+            <View style={ styles.containerContants }>
+                <FlatList style={[ styles.containerExtra, styles.containerShadow ]}>
+
+                </FlatList>
+            </View>
+        </ImageBackground>
     )
 }

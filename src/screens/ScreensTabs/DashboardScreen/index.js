@@ -1,11 +1,8 @@
-import React from 'react'
-import { View, Text, ImageBackground } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import React from 'react';
+import { View, Text, ImageBackground } from 'react-native';
 import { ChevronRight } from 'react-native-feather';
 
 import { FlatList } from 'react-native-gesture-handler'
-
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { 
     imgBackground,
@@ -17,12 +14,6 @@ import styles from './styles';
 import api from '../../../service/api';
 
 export default function DashboardScreen () {
-    const navigation = useNavigation();
-
-    async function navigateToLogout() {
-        AsyncStorage.clear()
-        navigation.navigate('LoginScreenEmail')
-    }
 
     return (
         <ImageBackground style={{flex : 1}} source={ imgBackground }>
@@ -30,7 +21,8 @@ export default function DashboardScreen () {
                 <Header />
             </View>
             <View style={ styles.containerContants }>
-                <View style={ styles.containerFeatures }>
+
+                <View style={[ styles.containerFeatures, styles.containerShadow ]}>
                     <View style={ styles.containerFeaturesRow } >
                         <Text style={ styles.containerFeaturesHeader } >
                             Faturamento
@@ -38,26 +30,28 @@ export default function DashboardScreen () {
                         <ChevronRight size={16} color={Colors.blue} />
                     </View>
                     <View style={ styles.containerFeaturesRow } >
-                        <Text>
+                        <Text style={{ color : Colors.noEvidence }} >
                             Balanço total do mês
                         </Text>
-                        <Text>
+                        <Text style={ styles.containerFeaturesValueMes }>
                             R$ 5.864,85
                         </Text>
                     </View>
                     <View style={ styles.containerFeaturesRow } >
-                        <Text>
+                        <Text style={{ color : Colors.noEvidence }} >
                             Balanço total do ano
                         </Text>
-                        <Text>
+                        <Text style={ styles.containerFeaturesValueAno }>
                             R$ 565.298,85
                         </Text>
                     </View>
                 </View>
-                <View style={ styles.containerVisitas }>
+
+                <View style={ [styles.containerVisitas, styles.containerShadow ] }>
 
                 </View>
-                <FlatList style={styles.containerExtra}>
+
+                <FlatList style={[ styles.containerExtra, styles.containerShadow ]}>
 
                 </FlatList>
             </View>

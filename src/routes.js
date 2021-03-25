@@ -53,6 +53,7 @@ function ScreensTab () {
             tabBarOptions={{
                 activeTintColor: Colors.blue,
                 inactiveTintColor: Colors.noEvidence,
+                safeAreaInsets : { top : 50, bottom : 180 },
                 style : { height: "8%", paddingBottom : 8 },
             }}
         >

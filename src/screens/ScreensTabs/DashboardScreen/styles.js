@@ -15,15 +15,12 @@ const styles = StyleSheet.create({
     containerContants : {
         flex : 1,
         paddingHorizontal : 8,
+
+        borderColor : "blue",
+        borderWidth : 1
     },
 
-    containerFeatures : {
-        flex : 1,
-        padding : 8,
-        paddingHorizontal : 16,
-        backgroundColor : Colors.white,
-        borderRadius : 15,
-
+    containerShadow : {
         // add shadows for iOS only
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
@@ -34,15 +31,62 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
 
+    containerFeatures : {
+        flex : 1,
+        // minHeight : 135,
+        // maxHeight : 140,
+        padding : 8,
+        marginVertical : 8,
+        paddingHorizontal : 16,
+        backgroundColor : Colors.white,
+        borderRadius : 15,
+    },
+
+    containerVisitas : {
+        flex : 1.5,
+        // minHeight : 185,
+        // maxHeight : 200,
+
+        padding : 8,
+
+        marginVertical : 8,
+        paddingHorizontal : 16,
+
+        backgroundColor : Colors.white,
+        borderRadius : 15,
+    },
+
+    containerExtra : {
+        flex : 1.5,
+        // minHeight : 135,
+        // maxHeight : 140,
+        padding : 8,
+        marginVertical : 8,
+        paddingHorizontal : 16,
+        backgroundColor : Colors.white,
+        borderRadius : 15,
+    },
+
     containerFeaturesRow : {
         flexDirection : 'row',
         alignItems : 'center',
         justifyContent : 'space-between',
+        marginBottom : 20,
     },
 
     containerFeaturesHeader : {
         fontSize : 18,
         color : Colors.chumbo,
+    },
+
+    containerFeaturesValueMes : {
+        fontSize : 20,
+        color : Colors.blue,
+    },
+
+    containerFeaturesValueAno : {
+        fontSize : 16,
+        color : Colors.blue,
     }
 })
 
