@@ -1,22 +1,30 @@
-import React from 'react';
-import { View, Text, ImageBackground } from 'react-native';
-import { ChevronRight } from 'react-native-feather';
-
-import { FlatList } from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react';
+import { View, FlatList, Text, Image, ImageBackground } from 'react-native';
 
 import { 
+    defaultAvatar,
     imgBackground,
 } from '../../../components/utils/Images'
 
 import Header from '../../../components/Header';
-import * as Colors from '../../../components/utils/Colors';
 import styles from './styles';
 import api from '../../../service/api';
 
 export default function DashboardScreen () {
+    const [products, setProducts] = useState([])
+
+    async function loadProducts () {
+        const response = await api.get('produto');
+
+        setProducts([ ...products, ...response.data ])
+    }
+
+    useEffect(() => {
+        loadProducts();
+    }, [])
 
     return (
-        <ImageBackground style={{flex : 1}} source={ imgBackground }>
+        <ImageBackground style={styles.imgBackground} source={ imgBackground }>
             <View style={ styles.containerHeader } >
                 <Header />
             </View>
@@ -34,11 +42,39 @@ export default function DashboardScreen () {
                     </Text>
                 </View>
 
-                <FlatList style={ styles.containerListProducts }>
-                    <View>
+                <FlatList style={ styles.containerListProducts }
+                    showsVerticalScrollIndicator = { false }
+                    data={[1, 2, 3, 4, 5, 6, 7, 8]}
+                    keyExtractor={ products => String(products) }
+                    renderItem={() => (
+                        <View style={[ styles.containerProducts, styles.containerShadow ]}>
+                            <View style={ styles.containerImage }>
+                                <Image style={ styles.image } source={defaultAvatar} />
+                            </View>
 
-                    </View>
-                </FlatList>
+                            <View style={ styles.containerDescription }>
+                                <Text style={ styles.containerDescriptionTitle }>
+                                    { "products.name" }
+                                </Text>
+                                <Text style={ styles.containerSubDescription }>
+                                    { "products.size_id" }
+                                </Text>
+                                <Text style={ styles.containerSubDescription }>
+                                    { "products.category_id" }
+                                </Text>
+                            </View>
+
+                            <View style={ styles.containerValues }>
+                                <Text style={ styles.containerPrice }>
+                                    { "R$ 25,90" /* "products.unit_price"*/ }
+                                </Text>
+                                <Text style={ styles.containerPrice }>
+                                    { "R$ 24,90"/* "products.unit_price_discount" */ }
+                                </Text>
+                            </View>
+                        </View>
+                    ) }
+                />
             </View>
         </ImageBackground>
     )
