@@ -31,6 +31,22 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
 
+    buttonPlus : {
+        width : 50,
+        height : 50,
+        backgroundColor : Colors.blue,
+        borderRadius : 50,
+        
+        alignItems : 'center',
+        justifyContent : 'center',
+
+        position :  'absolute',
+        bottom : 16,
+        right : 16,
+
+        zIndex : 999,
+    },
+
     containerTitleProducts : {
         flex : 1,
         flexDirection : 'row',

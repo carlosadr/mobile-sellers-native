@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, Image, ImageBackground } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 import { 
     defaultAvatar,
@@ -9,6 +10,7 @@ import {
 import Header from '../../../components/Header';
 import styles from './styles';
 import api from '../../../service/api';
+import { white } from '../../../components/utils/Colors';
 
 export default function DashboardScreen () {
     const [products, setProducts] = useState([])
@@ -41,6 +43,13 @@ export default function DashboardScreen () {
                         Preço
                     </Text>
                 </View>
+
+                <TouchableOpacity 
+                    style={[ styles.buttonPlus, styles.containerShadow ]} 
+                    onPress={ () => { console.log("Botão acrescentar produto foi prescionado.") } }
+                >
+                    <Feather name="plus" size={35} color={white} />
+                </TouchableOpacity>
 
                 <FlatList style={ styles.containerListProducts }
                     showsVerticalScrollIndicator = { false }
