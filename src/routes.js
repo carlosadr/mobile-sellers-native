@@ -20,7 +20,7 @@ import SettingsScreen from './screens/ScreensTabs/SettingsScreen';
 //#endregion
 
 //#region Imports importantes
-import Ionicons from 'react-native-vector-icons/Feather';
+import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Colors from '../src/components/utils/Colors'
 //#endregion
@@ -34,6 +34,8 @@ function ScreensTab () {
         screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
+
+                    size = focused ? 24 : 18;
                     
                     if ( route.name === "Dashboard" ) {
                         iconName = "pie-chart"
@@ -45,7 +47,7 @@ function ScreensTab () {
                         iconName = "settings"
                     }
                     
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return <Feather name={iconName} size={size} color={color} />;
                     
                 },
             })}
