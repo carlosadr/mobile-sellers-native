@@ -5,11 +5,15 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Bell } from 'react-native-feather';
 
 import styles from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../../src/service/api'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as Colors from '../utils/Colors';
-import { defaultAvatar, imgLogoSmall } from '../utils/Images';
+
+import { 
+    defaultAvatar, 
+    imgLogoSmall 
+} from '../utils/Images';
 
 export default function Header ( data ) {
     const [ user, setUser ] = useState("")
