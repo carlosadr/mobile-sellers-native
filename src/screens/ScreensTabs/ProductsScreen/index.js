@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 import { 
-    View, 
-    ScrollView, 
+    View,
     FlatList, 
     Text, 
     TouchableOpacity, 
     Image, 
     ImageBackground 
 } from 'react-native';
+
+import Swipeout from 'react-native-swipeout';
 
 import { Feather } from '@expo/vector-icons';
 
@@ -25,6 +26,11 @@ import Button from '../../../components/Button';
 
 export default function DashboardScreen () {
     const [ products, setProducts ] = useState([])
+
+    let swipeBtns = [{
+        text : 'Detetar',
+        backgroundColor : orange,
+    }]
 
     async function loadProducts () {
         const response = await api.get('produto');
@@ -67,8 +73,10 @@ export default function DashboardScreen () {
                     data={[1, 2, 3, 4, 5, 6, 7, 8]}
                     keyExtractor={ products => String(products) }
                     renderItem={() => (
-                        <TouchableOpacity 
-                            onPress={ () => {} }
+                        <Swipeout 
+                            right={ swipeBtns }
+                            backgroundColor='transparent'
+                            style = { styles.buttonDelete }
                         >
                             <View style={{ flexDirection : 'row', }} >
                                 <View style={[ styles.containerProducts, styles.containerShadow ]}>
@@ -97,19 +105,8 @@ export default function DashboardScreen () {
                                         </Text>
                                     </View>
                                 </View>
-                                {/* <TouchableOpacity style={{
-                                    flex : 0.20, 
-                                    backgroundColor : orange, 
-                                    alignItems : 'center',
-                                    justifyContent : 'center',
-                                    marginRight : 8,
-                                    borderRadius : 12,
-                                    marginVertical : 4,
-                                }} >
-                                    <Feather name="trash-2" size={ 22 } color={ white } />
-                                </TouchableOpacity> */}
                             </View>
-                        </TouchableOpacity>
+                        </Swipeout>
                     ) }
                 />
             </View>
