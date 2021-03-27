@@ -6,6 +6,8 @@ import {
     StyleSheet,
 } from 'react-native';
 
+import { Feather } from '@expo/vector-icons'
+
 import * as Colors from '../utils/Colors';
 
 interface ButtonProps {
@@ -27,10 +29,6 @@ const Button: React.FC<ButtonProps> = ({
     leftIcon,
     rightIcon,
     ...rest }) => {
-
-    function createIconReact(icon, color) {
-        return icon != null ? React.createElement(icon, { color: color }) : null
-    }
 
     const colorButton = (color) => {
         switch (color) {
@@ -114,9 +112,7 @@ const Button: React.FC<ButtonProps> = ({
                 {...rest}
             >
                 <View style={[styles.containerText, flexContaint( type ) ]}>
-
-                    {createIconReact(leftIcon, colorContant( type, color ))}
-
+                    <Feather name={leftIcon} color={ colorContant( type, color ) } size={22} />
                     <Text 
                         style={[ 
                             fontSize( type ), 
@@ -130,7 +126,7 @@ const Button: React.FC<ButtonProps> = ({
                         
                     </Text>
 
-                    {createIconReact(rightIcon, colorContant( type, color ))}
+                    <Feather name={rightIcon} color={ colorContant( type, color ) } size={22} />
 
                 </View>
             </TouchableOpacity>

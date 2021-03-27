@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Bell } from 'react-native-feather';
+import { Feather } from '@expo/vector-icons';
 
 import styles from './styles';
-import api from '../../../src/service/api'
+import api from '../../../src/service/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as Colors from '../utils/Colors';
 
-import { 
-    defaultAvatar, 
-    imgLogoSmall 
+import {
+    defaultAvatar,
+    imgLogoSmall,
 } from '../utils/Images';
 
 export default function Header ( data ) {
@@ -54,7 +54,7 @@ export default function Header ( data ) {
             <View style={styles.containerFristRow}>
                 <Image style={styles.containerLogo} source={ imgLogoSmall } />
                 <TouchableOpacity>
-                    <Bell size={16} color={Colors.white}/>
+                    <Feather name="bell" size={22} color={Colors.white}/>
                 </TouchableOpacity>
             </View>
             <View style={styles.containerLastRow}>

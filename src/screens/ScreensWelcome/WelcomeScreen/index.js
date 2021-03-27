@@ -4,8 +4,6 @@ import { View, Image, ImageBackground } from 'react-native';
 
 import ViewPager from '@react-native-community/viewpager'
 
-import { ChevronRight } from 'react-native-feather';
-
 import { 
     imgBackground,
     imgLogo,
@@ -65,9 +63,9 @@ export default function WelcomeScreen () {
                     <View style={{ flex : 2.5 }} />
                     <Button 
                         label="Avançar"
-                        color={visible}
-                        disabled={disabled}
-                        rightIcon={ChevronRight}
+                        color={ visible }
+                        disabled={ disabled }
+                        rightIcon={ "chevron-right" }
                         onPress={ () => { navigationToLogIn() } }
                     />
                 </View>

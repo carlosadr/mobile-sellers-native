@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
-import {ChevronLeft, Eye, EyeOff} from 'react-feather';
 
 import { 
     imgBackground,
@@ -80,7 +79,7 @@ export default function LastStep ( {route} ) {
                         <Input 
                             value={password}
                             label = "Insira sua senha"
-                            rightIcon = { state ? EyeOff : Eye }
+                            rightIcon = { state ? "eye-off" : "eye" }
                             marginVertical = { 6 }
                             secureTextEntry = {state}
                             textValues = { checkPassword() }
@@ -91,7 +90,7 @@ export default function LastStep ( {route} ) {
                             value={ confirmPassword }
                             label = "Confirme sua senha"
                             errorMsg = { textError }
-                            rightIcon = { state ? EyeOff : Eye }
+                            rightIcon = { state ? "eye-off" : "eye" }
                             marginVertical = { 6 }
                             secureTextEntry = {state}
                             textValues = { checkConfirmPassword() }
@@ -111,8 +110,8 @@ export default function LastStep ( {route} ) {
                 </View>
 
                 <Button
-                    label = ""
-                    leftIcon = {ChevronLeft}
+                    label = "Voltar"
+                    leftIcon = "chevron-left"
                     type = "text"
                     color = "orange"
                     style = {{ width : "25%", height : 50 }}

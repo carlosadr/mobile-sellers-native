@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
-import { User, Eye, EyeOff, Lock, ChevronLeft } from 'react-native-feather';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { 
@@ -87,19 +86,19 @@ export default function LoginScreenEmail () {
                         value={ email }
                         label = "Endereço de E-mail"
                         placeholder = "ex. contato@email.com"
-                        leftIcon = {User}
+                        leftIcon = "user"
                         marginVertical = { 6 }
                         textValues = { checkEmail() }
                         onChangeText = { text => setEmail(text) }
                     />
 
                     <Input 
-                        value={password}
+                        value={ password }
                         label = "Senha"
-                        leftIcon = {Lock}
-                        rightIcon = { state ? EyeOff : Eye }
+                        leftIcon = "lock"
+                        rightIcon = { state ? "eye-off" : "eye" }
                         marginVertical = { 6 }
-                        secureTextEntry = {state}
+                        secureTextEntry = { state }
                         textValues = { checkPassword() }
                         onChangeText={ text => setPassword(text) }
                         onPress={ () => state ? setState(false) : setState(true)}
@@ -122,8 +121,8 @@ export default function LoginScreenEmail () {
                     />
                 </View>
                 <Button
-                    label = ""
-                    leftIcon = {ChevronLeft}
+                    label = "Voltar"
+                    leftIcon = {"chevron-left"}
                     type = "text"
                     color = "orange"
                     style = {{ width : "25%", height : 50 }}

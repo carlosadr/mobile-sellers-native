@@ -10,6 +10,8 @@ import {
     Dimensions,
 } from 'react-native';
 
+import { Feather } from "@expo/vector-icons"
+
 import { maskCep, maskCpfOrCnpj, maskPhone } from '../utils/Masks';
 
 import * as Colors from '../utils/Colors';
@@ -27,8 +29,8 @@ interface InputProps extends TextInputProps {
     flex : number,
     marginHorizontal : number,
     marginVertical : number,
-    leftIcon : Element,
-    rightIcon : Element,
+    leftIcon : any,
+    rightIcon : any,
     inputMaskChange : Function,
 }
 
@@ -49,13 +51,6 @@ const Input: React.FC<InputProps> = ({
     const [value, setValue] = useState(false)
     const [position, setPosition] = useState(new Animated.Value(value ? 1 : 0))
     const [width, setWidth] = useState(Dimensions.get("screen").scale)
-
-    const createIconReact = (icon, color) => {
-        if (icon != null) {
-            return React.createElement(icon, { color: color, marginHorizontal: 8 })
-        }
-        return
-    }
 
     const handleChange = ( value : string ) => {
         switch (mask) {
@@ -155,7 +150,7 @@ const Input: React.FC<InputProps> = ({
                     {label}
                 </Animated.Text>
 
-                {createIconReact(leftIcon, returnAnimatedStyles())}
+                    <Feather style={{ marginHorizontal : 8 }} name={leftIcon} color={returnAnimatedStyles()} size={22} />
 
                 <TextInput
                     style={[
@@ -176,7 +171,7 @@ const Input: React.FC<InputProps> = ({
                 </Text>
 
                 <TouchableOpacity style={ !rightIcon ? {} : {marginLeft : 8} } { ...rest }>
-                    {createIconReact(rightIcon, returnAnimatedStyles())}
+                    <Feather style={{ marginHorizontal : 8 }} name={rightIcon} color={returnAnimatedStyles()} size={22} />
                 </TouchableOpacity>
             </View>
         </>

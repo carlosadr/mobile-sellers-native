@@ -1,17 +1,14 @@
 import React from 'react';
-import { View, Text, ImageBackground } from 'react-native';
-import { ChevronRight } from 'react-native-feather';
-
-import { FlatList } from 'react-native-gesture-handler'
+import { View, FlatList, Text, ImageBackground } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 import { 
     imgBackground,
-} from '../../../components/utils/Images'
+} from '../../../components/utils/Images';
 
 import Header from '../../../components/Header';
 import * as Colors from '../../../components/utils/Colors';
 import styles from './styles';
-import api from '../../../service/api';
 
 export default function DashboardScreen () {
 
@@ -27,7 +24,7 @@ export default function DashboardScreen () {
                         <Text style={ styles.containerFeaturesHeader } >
                             Faturamento
                         </Text>
-                        <ChevronRight size={16} color={Colors.blue} />
+                        <Feather name="chevron-left" size={16} color={Colors.blue} />
                     </View>
                     <View style={ styles.containerFeaturesRow } >
                         <Text style={{ color : Colors.noEvidence }} >

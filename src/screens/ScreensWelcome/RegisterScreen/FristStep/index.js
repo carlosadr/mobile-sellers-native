@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, ImageBackground } from 'react-native';
-import {ChevronLeft} from 'react-feather';
 
 import { 
     imgBackground,
@@ -133,8 +132,8 @@ export default function FristStep () {
                 </View>
 
                 <Button
-                    label = ""
-                    leftIcon = {ChevronLeft}
+                    label = "Voltar"
+                    leftIcon = {"chevron-left"}
                     type = "text"
                     color = "orange"
                     style = {{ width : "25%", height : 50 }}
