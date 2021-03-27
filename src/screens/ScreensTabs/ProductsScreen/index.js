@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, TouchableOpacity, Image, ImageBackground } from 'react-native';
+
+import { 
+    View, 
+    ScrollView, 
+    FlatList, 
+    Text, 
+    TouchableOpacity, 
+    Image, 
+    ImageBackground 
+} from 'react-native';
+
 import { Feather } from '@expo/vector-icons';
 
 import { 
@@ -10,10 +20,11 @@ import {
 import Header from '../../../components/Header';
 import styles from './styles';
 import api from '../../../service/api';
-import { white } from '../../../components/utils/Colors';
+import { orange, white } from '../../../components/utils/Colors';
+import Button from '../../../components/Button';
 
 export default function DashboardScreen () {
-    const [products, setProducts] = useState([])
+    const [ products, setProducts ] = useState([])
 
     async function loadProducts () {
         const response = await api.get('produto');
@@ -56,32 +67,49 @@ export default function DashboardScreen () {
                     data={[1, 2, 3, 4, 5, 6, 7, 8]}
                     keyExtractor={ products => String(products) }
                     renderItem={() => (
-                        <View style={[ styles.containerProducts, styles.containerShadow ]}>
-                            <View style={ styles.containerImage }>
-                                <Image style={ styles.image } source={defaultAvatar} />
-                            </View>
+                        <TouchableOpacity 
+                            onPress={ () => {} }
+                        >
+                            <View style={{ flexDirection : 'row', }} >
+                                <View style={[ styles.containerProducts, styles.containerShadow ]}>
+                                    <View style={ styles.containerImage }>
+                                        <Image style={ styles.image } source={defaultAvatar} />
+                                    </View>
 
-                            <View style={ styles.containerDescription }>
-                                <Text style={ styles.containerDescriptionTitle }>
-                                    { "products.name" }
-                                </Text>
-                                <Text style={ styles.containerSubDescription }>
-                                    { "products.size_id" }
-                                </Text>
-                                <Text style={ styles.containerSubDescription }>
-                                    { "products.category_id" }
-                                </Text>
-                            </View>
+                                    <View style={ styles.containerDescription }>
+                                        <Text style={ styles.containerDescriptionTitle }>
+                                            { "products.name" }
+                                        </Text>
+                                        <Text style={ styles.containerSubDescription }>
+                                            { "products.size_id" }
+                                        </Text>
+                                        <Text style={ styles.containerSubDescription }>
+                                            { "products.category_id" }
+                                        </Text>
+                                    </View>
 
-                            <View style={ styles.containerValues }>
-                                <Text style={ styles.containerPrice }>
-                                    { "R$ 25,90" /* "products.unit_price"*/ }
-                                </Text>
-                                <Text style={ styles.containerPrice }>
-                                    { "R$ 24,90"/* "products.unit_price_discount" */ }
-                                </Text>
+                                    <View style={ styles.containerValues }>
+                                        <Text style={ styles.containerPrice }>
+                                            { "R$ 25,90" /* "products.unit_price"*/ }
+                                        </Text>
+                                        <Text style={ styles.containerPrice }>
+                                            { "R$ 24,90" /* "products.unit_price_discount" */ }
+                                        </Text>
+                                    </View>
+                                </View>
+                                {/* <TouchableOpacity style={{
+                                    flex : 0.20, 
+                                    backgroundColor : orange, 
+                                    alignItems : 'center',
+                                    justifyContent : 'center',
+                                    marginRight : 8,
+                                    borderRadius : 12,
+                                    marginVertical : 4,
+                                }} >
+                                    <Feather name="trash-2" size={ 22 } color={ white } />
+                                </TouchableOpacity> */}
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     ) }
                 />
             </View>

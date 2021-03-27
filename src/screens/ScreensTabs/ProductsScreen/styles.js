@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     containerProducts : {
         flex : 1,
         flexDirection : 'row',
-        height : 120,
+        height : 108,
         marginVertical : 4,
         marginHorizontal : 8,
         borderRadius : 15,
