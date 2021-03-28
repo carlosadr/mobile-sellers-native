@@ -22,25 +22,74 @@ import Header from '../../../components/Header';
 import styles from './styles';
 import api from '../../../service/api';
 import { orange, white } from '../../../components/utils/Colors';
-import Button from '../../../components/Button';
+import SwipeableProducts from '../../../components/SwipeableProducts';
 
 export default function DashboardScreen () {
     const [ products, setProducts ] = useState([])
+    const [ loading, setLoading ] = useState(false);
 
-    let swipeBtns = [{
-        text : 'Detetar',
-        backgroundColor : orange,
-    }]
+    const productsList = [
+        {
+            store_id : 1,
+            status : "Ativo",
+            name : "Cueca Fralda Amarela",
+            sku : "EDF115252",
+            unit_price : 29.50,
+            unit_price_discount : 25.99,
+            description : "Cueca fralda serve para homens que já estão em uma certa idade para previnir freadas de cueca.",
+            stock : 1,
+            seo_description : "Algo",
+            seo_name : "Algo",
+            category_id : 1,
+            collor_id : 1,
+            size_id : 1
+        },
+        {
+            store_id : 2,
+            status : "Ativo",
+            name : "Cueca Fralda Roxa",
+            sku : "EDF115252",
+            unit_price : 29.50,
+            unit_price_discount : 25.99,
+            description : "Cueca fralda serve para homens que já estão em uma certa idade para previnir freadas de cueca.",
+            stock : 1,
+            seo_description : "Algo",
+            seo_name : "Algo",
+            category_id : 1,
+            collor_id : 1,
+            size_id : 1
+        },
+        {
+            store_id : 3,
+            status : "Ativo",
+            name : "Cueca Fralda Vermelha",
+            sku : "EDF115252",
+            unit_price : 29.50,
+            unit_price_discount : 25.99,
+            description : "Cueca fralda serve para homens que já estão em uma certa idade para previnir freadas de cueca.",
+            stock : 1,
+            seo_description : "Algo",
+            seo_name : "Algo",
+            category_id : 1,
+            collor_id : 1,
+            size_id : 1
+        }
+    ]
 
     async function loadProducts () {
-        const response = await api.get('produto');
+        if (loading) {
+            return;
+        }
 
-        setProducts([ ...products, ...response.data ])
+        // const response = await api.get('produto');
+
+        setProducts([ ...products, ...productsList ])
+        setLoading(true)
     }
 
     useEffect(() => {
         loadProducts();
-    }, [])
+    }, [ ])
 
     return (
         <ImageBackground style={styles.imgBackground} source={ imgBackground }>
@@ -68,45 +117,21 @@ export default function DashboardScreen () {
                     <Feather name="plus" size={35} color={white} />
                 </TouchableOpacity>
 
-                <FlatList style={ styles.containerListProducts }
+                <FlatList 
+                    style={ styles.containerListProducts }
                     showsVerticalScrollIndicator = { false }
-                    data={[1, 2, 3, 4, 5, 6, 7, 8]}
-                    keyExtractor={ products => String(products) }
-                    renderItem={() => (
-                        <Swipeout 
-                            right={ swipeBtns }
-                            backgroundColor='transparent'
-                            style = { styles.buttonDelete }
-                        >
-                            <View style={{ flexDirection : 'row', }} >
-                                <View style={[ styles.containerProducts, styles.containerShadow ]}>
-                                    <View style={ styles.containerImage }>
-                                        <Image style={ styles.image } source={defaultAvatar} />
-                                    </View>
-
-                                    <View style={ styles.containerDescription }>
-                                        <Text style={ styles.containerDescriptionTitle }>
-                                            { "products.name" }
-                                        </Text>
-                                        <Text style={ styles.containerSubDescription }>
-                                            { "products.size_id" }
-                                        </Text>
-                                        <Text style={ styles.containerSubDescription }>
-                                            { "products.category_id" }
-                                        </Text>
-                                    </View>
-
-                                    <View style={ styles.containerValues }>
-                                        <Text style={ styles.containerPrice }>
-                                            { "R$ 25,90" /* "products.unit_price"*/ }
-                                        </Text>
-                                        <Text style={ styles.containerPrice }>
-                                            { "R$ 24,90" /* "products.unit_price_discount" */ }
-                                        </Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </Swipeout>
+                    data={ products }
+                    keyExtractor={ products => String(products.id) }
+                    renderItem={({ item : products }) => (
+                        < SwipeableProducts
+                            image={ defaultAvatar }
+                            name={ products.name }
+                            sizes={ products.size_id }
+                            category={ products.category_id }
+                            price={ products.unit_price }
+                            price-discount={ products.unit_price_discount }
+                            onRightPress={ () => {} }
+                        />
                     ) }
                 />
             </View>

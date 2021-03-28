@@ -103,11 +103,13 @@ export default function Routes() {
     return(
         <NavigationContainer>
             <Stack.Navigator 
-            screenOptions={{ headerShown : false }}>
-                { tokenLocal === null ? 
-                    <Stack.Screen name="ScreensWelcome" component = { ScreensWelcome } />
-                    :
+            screenOptions={{ headerShown : false }}
+            initialRouteName={ "ScreensWelcome" }
+            >
+                { tokenLocal ? 
                     <Stack.Screen name="ScreensTab" component = { ScreensTab } />
+                    :
+                    <Stack.Screen name="ScreensWelcome" component = { ScreensWelcome } />
                 }
                 <Stack.Screen name="LoginScreenEmail" component = { LoginScreenEmail } />
             </Stack.Navigator>
