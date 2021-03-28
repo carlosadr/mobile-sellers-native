@@ -4,8 +4,8 @@ import { View, Image, ImageBackground } from 'react-native';
 
 import ViewPager from '@react-native-community/viewpager'
 
-import { 
-    imgBackground,
+import {
+    imgBackground_2,
     imgLogo,
 } from '../../../components/utils/Images'
 
@@ -39,8 +39,8 @@ export default function WelcomeScreen () {
 
     return(
         <ImageBackground 
-            source={imgBackground} 
-            style={styles.imgBackground}>
+            source={ imgBackground_2 } 
+            style={ styles.imgBackground }>
             
             <View style={styles.containerRouts}>
 
