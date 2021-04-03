@@ -13,7 +13,6 @@ import { Feather } from '@expo/vector-icons'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import * as Colors from '../utils/Colors'
-import { defaultAvatar } from '../utils/Images'
 
 interface SwipeableProductsProps {
     image : any,
@@ -30,7 +29,7 @@ const RightActions = ({ progress, dragX, onPress }) => {
         inputRange: [-100, 0],
         outputRange: [1, 0],
         extrapolate: 'clamp',
-    });
+    })
 
     return (
         <TouchableOpacity onPress={onPress}>
@@ -53,7 +52,7 @@ const SwipeableProducts: React.FC<SwipeableProductsProps> = ({
     category,
     price,
     price_discount, 
-    onRightPress 
+    onRightPress
 }) => (
     <>
         <Swipeable
